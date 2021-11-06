@@ -3,7 +3,7 @@ extends KinematicBody2D
 const _PROJECTILE := preload("res://Player/Projectile/Projectile.tscn")
 
 export var speed := 250
-export var jump_strength := 920
+export var jump_strength := 780
 
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
