@@ -41,7 +41,7 @@ func _process_movement_input()->void:
 		_sprite.flip_h = _velocity.x < 0
 		_duck_sprite.flip_h = _velocity.x < 0
 		
-	if Input.is_action_just_pressed("jump"):
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		_velocity.y -= jump_strength
 	
 	if not is_on_floor():
