@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 const _NUMBER_OF_POINTS := 30
 const _TWEEN_TIME := 0.2
+const _PLAYER_LAYER := 1
 
 export var speed := 600
 
@@ -25,19 +26,26 @@ func _draw():
 func _physics_process(_delta):
 	if not _kicked:
 		# Moving "zero" here to ensure we get the collision info
-		var collision = move_and_collide(Vector2.ZERO)
+		# warning-ignore:return_value_discarded
+		move_and_slide(Vector2.ZERO, Vector2.UP)
 		
-		# Check if the orb was kicked by a player
-		if collision and collision.collider.is_in_group("players"):
-			_kicked = true
-			_enemy_overlap_area.monitoring = true
-			set_collision_mask_bit(1, false)
-			_velocity.x = speed
-			if collision.position.x > global_position.x:
-				_moving_right = false
-				_velocity.x *= -1
-			else:
-				_moving_right = true
+		# Check if the orb was kicked by a player		
+		for i in range(0,get_slide_count()):
+			var collision := get_slide_collision(i)
+			if collision.collider.is_in_group("players"):
+				_kicked = true
+				_enemy_overlap_area.monitoring = true
+				set_collision_mask_bit(_PLAYER_LAYER, false)
+				_velocity.x = speed
+				
+				# Adjust direction based on if this was hit from left or right
+				if collision.position.x > global_position.x:
+					_moving_right = false
+					_velocity.x *= -1
+				else:
+					_moving_right = true
+
+	# Handle having been kicked already
 	else:
 		_velocity.y += _gravity
 		_velocity = move_and_slide(_velocity, Vector2.UP)

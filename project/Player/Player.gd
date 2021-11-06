@@ -31,6 +31,10 @@ func _physics_process(_delta):
 		_process_movement_input()
 	
 	_velocity = move_and_slide(_velocity, Vector2.UP)
+	for i in range(0, get_slide_count()):
+		var collision := get_slide_collision(i)
+		if collision.collider.is_in_group("enemies"):
+			queue_free()
 
 
 func _process_movement_input()->void:
@@ -54,3 +58,8 @@ func _process_movement_input()->void:
 		projectile.direction = Vector2.LEFT if _sprite.flip_h else Vector2.RIGHT
 		projectile.position = $ProjectileLaunchPoint.global_position
 		get_parent().add_child(projectile)
+
+
+# This is called when an enemy crosses into the damageable area of the player.
+func _on_DamageableArea_body_entered(_body):
+	queue_free()
