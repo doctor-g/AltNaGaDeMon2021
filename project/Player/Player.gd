@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const _PROJECTILE := preload("res://Player/Projectile/Projectile.tscn")
+
 export var speed := 250
 export var jump_strength := 920
 
@@ -47,4 +49,8 @@ func _process_movement_input()->void:
 	else:
 		_sprite.play("walk" if _velocity.x != 0 else "idle")
 	
-
+	if Input.is_action_just_pressed("fire"):
+		var projectile := _PROJECTILE.instance()
+		projectile.direction = Vector2.LEFT if _sprite.flip_h else Vector2.RIGHT
+		projectile.position = $ProjectileLaunchPoint.global_position
+		get_parent().add_child(projectile)
