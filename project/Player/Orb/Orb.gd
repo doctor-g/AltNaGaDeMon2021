@@ -24,7 +24,6 @@ func _physics_process(_delta):
 		if collision and collision.collider.is_in_group("players"):
 			_kicked = true
 			collision_mask = 0x1
-			print(str(get_collision_mask_bit(1)))
 			_velocity.x = speed
 			if collision.position.x > global_position.x:
 				_moving_right = false
