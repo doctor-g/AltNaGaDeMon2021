@@ -16,6 +16,13 @@ func _physics_process(_delta):
 		_sprite.visible = false
 		_duck_sprite.visible = true
 		_velocity.x = 0
+		
+		# Allow jumping down through tiles
+		if Input.is_action_just_pressed("jump"):
+			# Note that for non-one-way tiles, the physics engine will
+			# simply push the player back out of the collision, so we
+			# do not need a raycast or anything here.
+			position.y += 1
 	else:
 		_sprite.visible = true
 		_duck_sprite.visible = false
