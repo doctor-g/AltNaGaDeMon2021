@@ -15,6 +15,7 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("duck"):
 		_sprite.visible = false
 		_duck_sprite.visible = true
+		_velocity.x = 0
 	else:
 		_sprite.visible = true
 		_duck_sprite.visible = false
@@ -34,6 +35,9 @@ func _process_movement_input()->void:
 	if Input.is_action_just_pressed("jump"):
 		_velocity.y -= jump_strength
 	
-	_sprite.play("walk" if _velocity.x != 0 else "idle")
+	if not is_on_floor():
+		_sprite.play("jump")
+	else:
+		_sprite.play("walk" if _velocity.x != 0 else "idle")
 	
 
