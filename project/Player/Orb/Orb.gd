@@ -10,6 +10,9 @@ var _velocity := Vector2.ZERO
 var _kicked := false
 var _moving_right := false
 
+onready var _enemy_overlap_area := $EnemyOverlapArea
+
+
 func _draw():
 	var radius = $CollisionShape2D.shape.radius
 	draw_arc(Vector2.ZERO, radius, 0, TAU, _NUMBER_OF_POINTS, Color.aliceblue, 4)
@@ -23,7 +26,8 @@ func _physics_process(_delta):
 		# Check if the orb was kicked by a player
 		if collision and collision.collider.is_in_group("players"):
 			_kicked = true
-			collision_mask = 0x1
+			_enemy_overlap_area.monitoring = true
+			set_collision_mask_bit(1, false)
 			_velocity.x = speed
 			if collision.position.x > global_position.x:
 				_moving_right = false
@@ -33,6 +37,8 @@ func _physics_process(_delta):
 	else:
 		_velocity.y += _gravity
 		_velocity = move_and_slide(_velocity, Vector2.UP)
+		
+		# Bounce off of walls
 		if is_on_wall():
 			_moving_right = not _moving_right
 			_velocity.x = speed if _moving_right else -speed
@@ -40,7 +46,7 @@ func _physics_process(_delta):
 
 func capture(enemy:KinematicBody2D)->void:
 	enemy.collision_mask = 0
-	enemy.collision_layer = 8
+	enemy.collision_layer = 0
 	enemy.captured = true
 	
 	# Need to store the position because reparenting
@@ -58,3 +64,10 @@ func capture(enemy:KinematicBody2D)->void:
 		Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	# warning-ignore:return_value_discarded
 	tween.start()
+
+
+# When this sensor is active and runs into an enemy,
+# that means the orb was kicked, and we should damage
+# the enemy we hit
+func _on_EnemyOverlapArea_body_entered(body):
+	body.damage()

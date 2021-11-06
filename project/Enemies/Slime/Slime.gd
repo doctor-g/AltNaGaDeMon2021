@@ -23,3 +23,7 @@ func _physics_process(_delta):
 			_moving_right = not _moving_right
 			_velocity.x = speed if _moving_right else -speed
 		_sprite.flip_h = _moving_right
+
+
+func damage()->void:
+	queue_free()
