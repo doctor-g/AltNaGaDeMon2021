@@ -75,8 +75,8 @@ func capture(enemy:KinematicBody2D)->void:
 	var tween := Tween.new()
 	add_child(tween)
 	# warning-ignore:return_value_discarded
-	tween.interpolate_property(enemy, "global_position", \
-		enemy.global_position, global_position, _TWEEN_TIME, \
+	tween.interpolate_property(enemy, "position", \
+		enemy.position, Vector2.ZERO, _TWEEN_TIME, \
 		Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	# warning-ignore:return_value_discarded
 	tween.start()
