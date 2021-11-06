@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/grass.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/castleCenter_rounded.png" type="Texture" id=3]
 [ext_resource path="res://Enemies/Slime/Slime.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Spawner/Spawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/bg_grasslands.png" type="Texture" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 70, 70, 0, 70, 0, 0, 70, 0 )
@@ -57,6 +58,11 @@ points = PoolVector2Array( 70, 70, 0, 70, 0, 0, 70, 0 )
 1/z_index = 0
 
 [node name="Level" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 520, 377 )
+scale = Vector2( 1.48438, 1.48438 )
+texture = ExtResource( 6 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
