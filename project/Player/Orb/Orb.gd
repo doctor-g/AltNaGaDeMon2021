@@ -5,10 +5,14 @@ const _TWEEN_TIME := 0.2
 
 export var speed := 600
 
+# How many bounces before the orb disappears
+export var max_bounces := 4
+
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
 var _kicked := false
 var _moving_right := false
+var _bounces := 0
 
 onready var _enemy_overlap_area := $EnemyOverlapArea
 
@@ -40,8 +44,12 @@ func _physics_process(_delta):
 		
 		# Bounce off of walls
 		if is_on_wall():
-			_moving_right = not _moving_right
-			_velocity.x = speed if _moving_right else -speed
+			_bounces += 1
+			if _bounces >= max_bounces:
+				queue_free()
+			else:
+				_moving_right = not _moving_right
+				_velocity.x = speed if _moving_right else -speed
 
 
 func capture(enemy:KinematicBody2D)->void:
