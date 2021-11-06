@@ -17,14 +17,12 @@ extents = Vector2( 25, 14 )
 
 [node name="Slime" type="KinematicBody2D" groups=["enemies"]]
 collision_layer = 4
-collision_mask = 3
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 1, -13 )
 frames = SubResource( 1 )
 animation = "walk"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
