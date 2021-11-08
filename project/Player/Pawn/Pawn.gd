@@ -100,12 +100,18 @@ func play_hurt_animation():
 
 
 # This is called when an enemy crosses into the damageable area of the player.
-func _on_DamageableArea_body_entered(_body):
-	_dead = true
-	_sprite.stop()
-	$StandingCollision.set_deferred("disabled", true)
-	$DamageableArea/CollisionShape2D.set_deferred("disabled", true)
-	_anim_player.play("dead")
+# The orb can also cross this line because the orb has to register collisions
+# with the player, so it can be kicked. This should only happen if the orb
+# is spawned too close to the player, and then the physics system jerks them
+# apart.
+func _on_DamageableArea_body_entered(body:Node2D):
+	# Make sure it's an enemy and not the orb as described above.
+	if body.is_in_group("enemies"):
+		_dead = true
+		_sprite.stop()
+		$StandingCollision.set_deferred("disabled", true)
+		$DamageableArea/CollisionShape2D.set_deferred("disabled", true)
+		_anim_player.play("dead")
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
