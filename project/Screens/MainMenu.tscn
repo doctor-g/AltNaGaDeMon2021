@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Screens/JoinControl.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/MainMenu.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Common/ConcertOne-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 72
+font_data = SubResource( 1 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -185.0
+margin_top = -28.5
+margin_right = 185.0
+margin_bottom = 28.5
+custom_fonts/font = SubResource( 2 )
+text = "A Cool Title"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JoinControls" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -250.0
+margin_top = -167.0
+margin_right = 250.0
+margin_bottom = -109.0
+custom_constants/separation = 100
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JoinControl" parent="JoinControls" instance=ExtResource( 1 )]
+margin_right = 200.0
+margin_bottom = 58.0
+
+[node name="JoinControl2" parent="JoinControls" instance=ExtResource( 1 )]
+margin_left = 300.0
+margin_right = 500.0
+margin_bottom = 58.0
+index = 1
+
+[connection signal="complete" from="JoinControls/JoinControl" to="." method="_on_JoinControl_complete"]
+[connection signal="complete" from="JoinControls/JoinControl2" to="." method="_on_JoinControl_complete"]

@@ -7,7 +7,7 @@
 [ext_resource path="res://Spawner/Spawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/bg_grasslands.png" type="Texture" id=6]
 [ext_resource path="res://World/HUD.tscn" type="PackedScene" id=7]
-[ext_resource path="res://World/ConcertOne-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Common/ConcertOne-Regular.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 70, 70, 0, 70, 0, 0, 70, 0 )
