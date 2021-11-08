@@ -25,5 +25,7 @@ func _physics_process(_delta):
 		_sprite.flip_h = _moving_right
 
 
-func damage()->void:
+# Damage the enemy, with the damage coming from the given source (player)
+func damage(source)->void:
+	source.score += 100
 	queue_free()

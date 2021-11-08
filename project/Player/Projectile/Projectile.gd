@@ -4,7 +4,13 @@ const _Orb := preload("res://Player/Orb/Orb.tscn")
 
 export var speed := 350
 
+# The player who created this projectile
+var player
 var direction := Vector2.ZERO
+
+func _ready():
+	assert(player!=null, "Player must be specified")
+
 
 func _physics_process(_delta):
 	# warning-ignore:return_value_discarded
@@ -14,6 +20,7 @@ func _physics_process(_delta):
 		if collision.collider.is_in_group("enemies"):
 			var enemy : KinematicBody2D = collision.collider
 			var orb : KinematicBody2D = _Orb.instance()
+			orb.player = player
 			orb.set_as_toplevel(true)
 			orb.global_position = collision.position
 			get_parent().add_child(orb)

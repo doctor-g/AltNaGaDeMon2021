@@ -9,6 +9,7 @@ const _PROJECTILE := preload("res://Player/Projectile/Projectile.tscn")
 export var speed := 250
 export var jump_strength := 780
 
+var player
 var start_invincible := false
 var index := 0 
 
@@ -24,6 +25,8 @@ onready var _invincibility_timer := $InvincibilityTimer
 onready var _sprite_container := $SpriteContainer
 
 func _ready():
+	assert(player!=null, "Player must be specified")
+	
 	_action_prefix = "p%d_" % (index + 1)
 	
 	# Use the right animated sprite based on the player index
@@ -89,6 +92,7 @@ func _process_movement_input()->void:
 	
 	if Input.is_action_just_pressed(_action("fire")):
 		var projectile := _PROJECTILE.instance()
+		projectile.player = player
 		projectile.direction = Vector2.LEFT if _sprite.flip_h else Vector2.RIGHT
 		projectile.position = $ProjectileLaunchPoint.global_position
 		get_parent().add_child(projectile)

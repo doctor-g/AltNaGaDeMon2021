@@ -14,6 +14,9 @@ export var max_bounces := 4
 
 var color := _COLOR
 
+# The player who formed the orb
+var player
+
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
 var _kicked := false
@@ -29,6 +32,11 @@ var _enemy_mask : int
 
 onready var _enemy_overlap_area := $EnemyOverlapArea
 onready var _anim_player := $AnimationPlayer
+
+
+func _ready():
+	assert(player!=null, "Player must be specified")
+
 
 func _draw():
 	var radius = $CollisionShape2D.shape.radius
@@ -73,6 +81,8 @@ func _physics_process(_delta):
 		if is_on_wall():
 			_bounces += 1
 			if _bounces >= max_bounces:
+				# Reward the player whose orb is expiring
+				player.score += 100
 				queue_free()
 			else:
 				_moving_right = not _moving_right
@@ -116,7 +126,7 @@ func toggle_color():
 # that means the orb was kicked, and we should damage
 # the enemy we hit
 func _on_EnemyOverlapArea_body_entered(body):
-	body.damage()
+	body.damage(player)
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):

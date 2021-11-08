@@ -17,6 +17,7 @@ func _ready():
 
 func _spawn_player(index:int, invincible: bool)->Pawn:
 	var pawn : Pawn = preload("res://Player/Pawn/Pawn.tscn").instance()
+	pawn.player = _players[index]
 	pawn.index = index
 	pawn.start_invincible = invincible
 	pawn.position = $SpawnPoints.get_children()[index].position
