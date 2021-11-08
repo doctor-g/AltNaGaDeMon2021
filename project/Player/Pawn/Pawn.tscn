@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Player/Pawn/Pawn.gd" type="Script" id=1]
 [ext_resource path="res://Player/Pawn/P1Images/p1_walk04.png" type="Texture" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://Player/Pawn/P2Images/p3_stand.png" type="Texture" id=29]
 [ext_resource path="res://Player/Pawn/P2Images/p3_walk10.png" type="Texture" id=30]
 [ext_resource path="res://Player/Pawn/P2Images/p3_duck.png" type="Texture" id=31]
+[ext_resource path="res://Player/Pawn/P2Images/p3_hurt.png" type="Texture" id=32]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -72,6 +73,11 @@ animations = [ {
 "name": "walk",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 32 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 24 ) ],
 "loop": true,
 "name": "jump",
@@ -86,7 +92,7 @@ animations = [ {
 [sub_resource type="Animation" id=2]
 resource_name = "dead"
 tracks/0/type = "value"
-tracks/0/path = NodePath("P1AnimatedSprite:offset")
+tracks/0/path = NodePath("SpriteContainer:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -98,7 +104,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -100 ), Vector2( 0, 800 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("P1AnimatedSprite:scale")
+tracks/1/path = NodePath("SpriteContainer:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -110,7 +116,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ), Vector2( 1, 1 ) ]
 }
 tracks/2/type = "method"
-tracks/2/path = NodePath("P1AnimatedSprite")
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -119,8 +125,8 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ "hurt", false ],
-"method": "play"
+"args": [  ],
+"method": "play_hurt_animation"
 } ]
 }
 
@@ -128,21 +134,23 @@ tracks/2/keys = {
 collision_layer = 2
 script = ExtResource( 1 )
 
-[node name="P1AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="StandingCollision" type="CollisionShape2D" parent="."]
+position = Vector2( -2, -46.25 )
+shape = ExtResource( 14 )
+
+[node name="SpriteContainer" type="Node2D" parent="."]
+
+[node name="P1AnimatedSprite" type="AnimatedSprite" parent="SpriteContainer"]
 position = Vector2( 0, -46 )
 frames = SubResource( 1 )
 animation = "idle"
 playing = true
 
-[node name="P2AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="P2AnimatedSprite" type="AnimatedSprite" parent="SpriteContainer"]
 visible = false
 position = Vector2( 0, -46 )
 frames = SubResource( 3 )
-animation = "duck"
-
-[node name="StandingCollision" type="CollisionShape2D" parent="."]
-position = Vector2( -2, -46.25 )
-shape = ExtResource( 14 )
+animation = "hurt"
 
 [node name="ProjectileLaunchPoint" type="Node2D" parent="."]
 position = Vector2( 0, -31 )

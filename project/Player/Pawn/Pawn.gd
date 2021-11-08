@@ -16,22 +16,24 @@ var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
 var _dead := false
 var _action_prefix : String
-var _sprite
+var _sprite : AnimatedSprite
 
 onready var _anim_player := $AnimationPlayer
 onready var _damageable_area := $DamageableArea
 onready var _invincibility_timer := $InvincibilityTimer
+onready var _sprite_container := $SpriteContainer
 
 func _ready():
 	_action_prefix = "p%d_" % (index + 1)
 	
 	# Use the right animated sprite based on the player index
-	if index == 0:
-		_sprite = $P1AnimatedSprite
-	if index == 1:
-		$P1AnimatedSprite.visible = false
-		$P2AnimatedSprite.visible = true
-		_sprite = $P2AnimatedSprite
+	for i in range(0,_sprite_container.get_child_count()):
+		var child : AnimatedSprite = _sprite_container.get_children()[i]
+		if i == index:
+			_sprite = child
+			_sprite.visible = true
+		else:
+			child.visible = false
 	
 	if start_invincible:
 		_invincibility_timer.start()
@@ -90,6 +92,11 @@ func _process_movement_input()->void:
 		projectile.direction = Vector2.LEFT if _sprite.flip_h else Vector2.RIGHT
 		projectile.position = $ProjectileLaunchPoint.global_position
 		get_parent().add_child(projectile)
+
+
+# Play the hurt animation of the current sprite
+func play_hurt_animation():
+	_sprite.play("hurt")
 
 
 # This is called when an enemy crosses into the damageable area of the player.
