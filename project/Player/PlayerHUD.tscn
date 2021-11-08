@@ -35,3 +35,5 @@ margin_right = 1120.0
 margin_bottom = 369.0
 size_flags_horizontal = 3
 alignment = 1
+
+[node name="ScoreTween" type="Tween" parent="."]
