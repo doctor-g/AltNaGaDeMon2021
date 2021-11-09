@@ -22,6 +22,7 @@ func _ready():
 		_lives_box.add_child(icon)
 	
 	_score_label.text = str(player.score)
+	_score_label.add_color_override("font_color", player.color)
 	player.connect("lives_changed", self, "_on_Player_lives_changed")
 	player.connect("score_changed", self, "_on_Player_score_changed")
 
