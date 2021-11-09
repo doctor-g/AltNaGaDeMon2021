@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player/Orb/Orb.gd" type="Script" id=1]
 [ext_resource path="res://Player/Orb/orb_collision_shape.tres" type="Shape2D" id=2]
+[ext_resource path="res://Enemies/fisheye_shader.tres" type="Material" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "captured-and-releasing"
@@ -40,6 +41,7 @@ tracks/0/keys = {
 }
 
 [node name="Orb" type="KinematicBody2D"]
+material = ExtResource( 3 )
 collision_layer = 8
 collision_mask = 3
 script = ExtResource( 1 )

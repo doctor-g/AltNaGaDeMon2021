@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=2]
+code = "// Inspired by https://danielilett.com/2019-10-17-tut3-1-something-fishy/
+shader_type canvas_item;
+
+uniform float power = 1.0; // Increase for fisheye
+
+vec2 distort(vec2 p)
+{
+	float theta = atan(p.y, p.x);
+	float radius = length(p);
+	radius = pow(radius, power);
+	p.x = radius * cos(theta);
+	p.y = radius * sin(theta);
+	return 0.5 * (p+1.0);
+}
+
+void fragment()
+{
+	vec2 xy = UV - vec2(0.5,0.5); // Move origin to center
+	COLOR = texture(TEXTURE, distort(xy*2.0));
+}"
+
+[resource]
+shader = SubResource( 2 )
+shader_param/power = 1.0

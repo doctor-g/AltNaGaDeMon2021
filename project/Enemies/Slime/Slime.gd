@@ -2,17 +2,21 @@ extends KinematicBody2D
 
 export var speed := 100
 
-var captured := false
+var captured := false setget _set_captured
 
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
 var _moving_right := false
 
 onready var _sprite := $AnimatedSprite
+onready var _anim_player := $AnimationPlayer
 
 func _ready():
 	# The slime defaults to facing left
 	_velocity.x = -speed
+	
+	# Give each instance its own shader
+	_sprite.material = _sprite.material.duplicate()
 
 
 func _physics_process(_delta):
@@ -40,3 +44,13 @@ func damage(source)->void:
 	print("Added popup at %s" % str(points_popup.position))
 	
 	queue_free()
+
+
+func _set_captured(value:bool)->void:
+	captured = value
+	if captured:
+		_anim_player.play("captured")
+	else:
+		# Reset animated values and then stop the animation
+		_anim_player.stop()
+		_anim_player.play("RESET")
