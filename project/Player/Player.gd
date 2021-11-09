@@ -1,16 +1,20 @@
 class_name Player
 extends Object
 
+const _COLORS = [ Color8(139, 207, 186), Color8(243, 175, 197) ]
+
 signal score_changed(new_score)
 signal lives_changed(new_lives)
 
-var index := -1
+var index := -1 
 var lives := 3 setget _set_lives
 var score := 0 setget _set_score
 var pawn setget _set_pawn
+var color 
 
 func _init(_index:int):
 	index = _index
+	color = _COLORS[index]
 
 
 func make_hud()->Control:

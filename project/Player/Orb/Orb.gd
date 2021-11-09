@@ -4,7 +4,6 @@ const _NUMBER_OF_POINTS := 30
 const _TWEEN_TIME := 0.2
 const _PLAYER_LAYER := 1
 
-const _COLOR := Color.aliceblue
 const _WARNING_COLOR := Color.yellow
 
 export var speed := 600
@@ -12,7 +11,7 @@ export var speed := 600
 # How many bounces before the orb disappears
 export var max_bounces := 4
 
-var color := _COLOR
+var color
 
 # The player who formed the orb
 var player
@@ -36,6 +35,7 @@ onready var _anim_player := $AnimationPlayer
 
 func _ready():
 	assert(player!=null, "Player must be specified")
+	color = player.color
 
 
 func _draw():
@@ -62,7 +62,7 @@ func _physics_process(_delta):
 				# Also make sure the color is right and redraw,
 				# since it can be animated.
 				_anim_player.stop(true)
-				color = _COLOR
+				color = player.color
 				update()
 				
 				# Adjust direction based on if this was hit from left or right
@@ -118,7 +118,7 @@ func capture(enemy:KinematicBody2D)->void:
 
 
 func toggle_color():
-	color = _WARNING_COLOR if color==_COLOR else _COLOR
+	color = _WARNING_COLOR if color==player.color else player.color
 	update() # Force redraw
 
 
