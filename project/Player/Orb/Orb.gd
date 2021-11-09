@@ -3,6 +3,7 @@ extends KinematicBody2D
 const _NUMBER_OF_POINTS := 30
 const _TWEEN_TIME := 0.2
 const _PLAYER_LAYER := 1
+const _ROTATION_SPEED := 600 # degrees per second
 
 const _WARNING_COLOR := Color.yellow
 
@@ -43,7 +44,7 @@ func _draw():
 	draw_arc(Vector2.ZERO, radius, 0, TAU, _NUMBER_OF_POINTS, color, 4)
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if not _kicked:
 		# Moving "zero" here to ensure we get the collision info
 		# warning-ignore:return_value_discarded
@@ -75,6 +76,8 @@ func _physics_process(_delta):
 	# Handle having been kicked already
 	else:
 		_velocity.y += _gravity
+		_captured_enemy.rotation_degrees += _ROTATION_SPEED * delta \
+											* (-1 if _velocity.x < 0 else 1)
 		_velocity = move_and_slide(_velocity, Vector2.UP)
 		
 		# Bounce off of walls
