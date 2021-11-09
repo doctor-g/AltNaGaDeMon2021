@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Screens/JoinControl.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Screens/MainMenu.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFontData" id=1]
@@ -33,30 +32,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JoinControls" type="HBoxContainer" parent="."]
+[node name="ButtonBox" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -250.0
-margin_top = -167.0
-margin_right = 250.0
-margin_bottom = -109.0
-custom_constants/separation = 100
-alignment = 1
+margin_left = -43.5
+margin_top = -172.0
+margin_right = 43.5
+margin_bottom = -120.0
+custom_constants/separation = 12
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JoinControl" parent="JoinControls" instance=ExtResource( 1 )]
-margin_right = 200.0
-margin_bottom = 58.0
+[node name="Start1PButton" type="Button" parent="ButtonBox"]
+margin_right = 87.0
+margin_bottom = 20.0
+text = "One Player"
 
-[node name="JoinControl2" parent="JoinControls" instance=ExtResource( 1 )]
-margin_left = 300.0
-margin_right = 500.0
-margin_bottom = 58.0
-index = 1
+[node name="Start2PButton" type="Button" parent="ButtonBox"]
+margin_top = 32.0
+margin_right = 87.0
+margin_bottom = 52.0
+text = "Two Players"
 
-[connection signal="complete" from="JoinControls/JoinControl" to="." method="_on_JoinControl_complete"]
-[connection signal="complete" from="JoinControls/JoinControl2" to="." method="_on_JoinControl_complete"]
+[connection signal="pressed" from="ButtonBox/Start1PButton" to="." method="_on_Start1PButton_pressed"]
+[connection signal="pressed" from="ButtonBox/Start2PButton" to="." method="_on_Start2PButton_pressed"]
