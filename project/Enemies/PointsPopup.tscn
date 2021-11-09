@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Common/ConcertOne-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Enemies/PointsPopup.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 2
+outline_color = Color( 0.247059, 0.247059, 0.247059, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatableNode:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -39, -68 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade-up"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatableNode:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 0.233258, 0.233258 ),
+"update": 0,
+"values": [ Vector2( -39, -20 ), Vector2( -39, -68 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatableNode:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 4 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="PointsPopup" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="AnimatableNode" type="Node2D" parent="."]
+position = Vector2( -39, -68 )
+
+[node name="Label" type="Label" parent="AnimatableNode"]
+margin_right = 71.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 1 )
+text = "+XXX"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fade-up"
+anims/RESET = SubResource( 2 )
+anims/fade-up = SubResource( 3 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

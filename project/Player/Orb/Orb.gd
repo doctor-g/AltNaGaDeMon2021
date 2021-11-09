@@ -81,8 +81,9 @@ func _physics_process(_delta):
 		if is_on_wall():
 			_bounces += 1
 			if _bounces >= max_bounces:
-				# Reward the player whose orb is expiring
-				player.score += 100
+				# Destroy the contained enemy, which should trigger
+				# a change in player score.
+				_captured_enemy.damage(player)
 				queue_free()
 			else:
 				_moving_right = not _moving_right
