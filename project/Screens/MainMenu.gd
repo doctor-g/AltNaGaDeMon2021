@@ -1,6 +1,6 @@
 extends Control
 
-const _LEVEL := preload("res://World/Level.tscn")
+const _WORLD := preload("res://World/World.tscn")
 
 
 func _ready():
@@ -17,9 +17,9 @@ func _on_Start2PButton_pressed():
 
 func _start_game(num_players:int)->void:
 	assert (num_players>0)
-	var level := _LEVEL.instance()
-	level.num_players = num_players
-	get_tree().get_root().add_child(level)
+	var world := _WORLD.instance()
+	world.num_players = num_players
+	get_tree().get_root().add_child(world)
 	get_tree().get_root().remove_child(self)
 
 

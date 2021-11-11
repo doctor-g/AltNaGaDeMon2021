@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal destroyed
+
 export var speed := 100
 
 var captured := false setget _set_captured
@@ -41,7 +43,8 @@ func damage(source)->void:
 	get_tree().current_scene.add_child(points_popup)
 	points_popup.set_as_toplevel(true)
 	points_popup.position = global_position
-	print("Added popup at %s" % str(points_popup.position))
+	
+	emit_signal("destroyed")
 	
 	queue_free()
 

@@ -21,6 +21,7 @@ func _ready():
 		icon.texture = _ICONS[player.index]
 		_lives_box.add_child(icon)
 	
+	_displayed_score = player.score	
 	_score_label.text = str(player.score)
 	_score_label.add_color_override("font_color", player.color)
 	player.connect("lives_changed", self, "_on_Player_lives_changed")
@@ -34,6 +35,7 @@ func _process(_delta):
 func _on_Player_lives_changed(_new_lives:int)->void:
 	var life_icon = _lives_box.get_child(0)
 	_lives_box.remove_child(life_icon)
+
 
 func _on_Player_score_changed(new_score:int)->void:
 	# warning-ignore:return_value_discarded
