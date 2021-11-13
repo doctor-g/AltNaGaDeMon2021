@@ -4,18 +4,21 @@ signal destroyed
 
 export var speed := 100
 
+# Which direction is this thing moving
+export var direction := Vector2.LEFT
+
 var captured := false setget _set_captured
 
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
-var _moving_right := false
+
 
 onready var _sprite := $AnimatedSprite
 onready var _anim_player := $AnimationPlayer
 
 func _ready():
 	# The slime defaults to facing left
-	_velocity.x = -speed
+	_velocity.x = speed * direction.x
 	
 	# Give each instance its own shader
 	_sprite.material = _sprite.material.duplicate()
@@ -26,9 +29,9 @@ func _physics_process(_delta):
 		_velocity.y += _gravity
 		_velocity = move_and_slide(_velocity, Vector2.UP)
 		if is_on_wall():
-			_moving_right = not _moving_right
-			_velocity.x = speed if _moving_right else -speed
-		_sprite.flip_h = _moving_right
+			direction.x *= -1
+			_velocity.x = direction.x * speed
+		_sprite.flip_h = direction.x > 0
 
 
 # Damage the enemy, with the damage coming from the given source (pawn)
