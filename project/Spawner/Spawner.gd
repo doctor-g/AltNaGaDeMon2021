@@ -8,29 +8,19 @@ const _SLIME := preload("res://Enemies/Slime/Slime.tscn")
 const _LEFT := 0
 const _RIGHT := 1
 
-# The number of enemies to spawn before this spawner is done
-export var number_to_spawn := 3
-
-# Which direction are things facing that come forth
-export(int, "left", "right") var facing := _LEFT
+var _enemy:Node2D
 
 onready var _anim_player := $AnimationPlayer
 
-func spawn():
-	var enemy :Node2D = _SLIME.instance()
-	enemy.global_position = global_position
-	enemy.direction = Vector2.LEFT if facing==_LEFT else Vector2.RIGHT
-	get_parent().add_child(enemy)
-	number_to_spawn -= 1
-	emit_signal("enemy_spawned", enemy)
-
-
-func _on_WaitTimer_timeout():
+func spawn(scene:PackedScene, facing_left:bool=true):
+	_enemy = scene.instance()
+	_enemy.global_position = global_position
+	_enemy.direction = Vector2.LEFT if facing_left else Vector2.RIGHT
+	# This will start the spawn anim, which at the right point,
+	# will call add_spawned_enemy, which adds _enemy as a child
 	_anim_player.play("spawn")
 
 
-func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name=="spawn" and number_to_spawn==0:
-		_anim_player.play("disappear")
-	elif anim_name=="disappear":
-		queue_free()
+func _add_spawned_enemy():
+	get_parent().add_child(_enemy)
+	emit_signal("enemy_spawned", _enemy)

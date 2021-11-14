@@ -125,4 +125,3 @@ position = Vector2( 840, 120 )
 
 [node name="Spawner2" parent="Spawners" instance=ExtResource( 5 )]
 position = Vector2( 277, 120 )
-facing = 1

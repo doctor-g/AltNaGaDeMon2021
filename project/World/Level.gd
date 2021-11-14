@@ -6,19 +6,17 @@ signal complete
 var players := []
 
 var _enemies := 0
-var _spawners := 0
+var _spawning_complete := false
 
 onready var _game_over_label := $HUD/GameOverLabel
+onready var _spawners = $Spawners.get_children()
 
 func _ready():
 	assert(not players.empty(), "players variable must be set")
 	
 	for spawner in $Spawners.get_children():
-		_spawners += 1
 		# warning-ignore:return_value_discarded	
 		spawner.connect("enemy_spawned", self, "_on_Spawner_enemy_spawned")
-		# warning-ignore:return_value_discarded	
-		spawner.connect("tree_exited", self, "_on_Spawner_tree_exited")
 	
 	# Spawn the pawns
 	for i in range(0,players.size()):
@@ -27,7 +25,20 @@ func _ready():
 		# warning-ignore:return_value_discarded	
 		player.connect("lives_changed", self, "_on_Player_lives_changed", [player])
 		$HUD/TopBar.add_child(player.make_hud())
+		
+	_run()
 
+
+# Run this level
+func _run():
+	var Slime := preload("res://Enemies/Slime/Slime.tscn")
+	yield(get_tree().create_timer(1.0), "timeout")
+	for _i in range(0,2):
+		_spawners[0].spawn(Slime, true)
+		_spawners[1].spawn(Slime, false)
+		yield(get_tree().create_timer(3.0), "timeout")
+	_spawning_complete = true
+	
 
 func _on_Spawner_enemy_spawned(enemy:Node2D)->void:
 	_enemies += 1
@@ -40,13 +51,8 @@ func _on_Enemy_destroyed()->void:
 	_check_end_of_level()
 	
 	
-func _on_Spawner_tree_exited()->void:
-	_spawners -= 1
-	_check_end_of_level()
-	
-	
 func _check_end_of_level()->void:
-	if _spawners==0 and _enemies==0:
+	if _enemies==0 and _spawning_complete:
 		emit_signal("complete")
 
 
