@@ -17,12 +17,6 @@ func _ready():
 	_start_next_level()
 
 
-func _on_Level_complete():
-	print("Complete!")
-	_level_node.queue_free()
-	_start_next_level()
-
-
 func _start_next_level():
 	var new_level : Node2D= load("res://World/Level.tscn").instance()
 	new_level.players = _players
@@ -38,6 +32,12 @@ func _start_next_level():
 	new_level.connect("complete", self, "_on_Level_complete")
 	# warning-ignore:return_value_discarded	
 	new_level.connect("game_over", self, "_on_game_over")
+
+
+func _on_Level_complete():
+	print("Complete!")
+	_level_node.queue_free()
+	_start_next_level()
 
 
 func _on_game_over():
