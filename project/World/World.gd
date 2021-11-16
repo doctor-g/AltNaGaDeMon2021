@@ -35,7 +35,6 @@ func _start_next_level():
 
 
 func _on_Level_complete():
-	print("Complete!")
 	_level_node.queue_free()
 	_start_next_level()
 
