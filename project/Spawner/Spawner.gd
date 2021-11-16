@@ -24,3 +24,23 @@ func spawn(scene:PackedScene, facing_left:bool=true):
 func _add_spawned_enemy():
 	get_parent().add_child(_enemy)
 	emit_signal("enemy_spawned", _enemy)
+	
+
+# Plays an outro animation and removes this spawner
+func expire():
+	# This can be called while a spawn animation is still finishing.
+	# If so, wait until that's done, then wrap up.
+	if _anim_player.current_animation=="spawn":
+		# warning-ignore:return_value_discarded
+		_anim_player.connect("animation_finished", self, \
+			"_on_AnimationPlayer_animation_finished", [], CONNECT_ONESHOT)
+	else:
+		_play_expiration()
+
+
+func _on_AnimationPlayer_animation_finished(_anim:String)->void:
+	_play_expiration()
+
+
+func _play_expiration():
+	_anim_player.play("disappear")
