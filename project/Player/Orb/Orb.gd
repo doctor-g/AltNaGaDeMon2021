@@ -20,7 +20,6 @@ var player
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
 var _kicked := false
-var _moving_right := false
 var _bounces := 0
 
 var _captured_enemy : KinematicBody2D = null
@@ -46,35 +45,12 @@ func _draw():
 
 func _physics_process(delta):
 	if not _kicked:
-		# Moving "zero" here to ensure we get the collision info
-		# warning-ignore:return_value_discarded
-		move_and_slide(Vector2.ZERO, Vector2.UP)
+		_velocity.y += _gravity
+		_velocity = move_and_slide(_velocity, Vector2.UP)
 		
-		# Check if the orb was kicked by a player		
-		for i in range(0,get_slide_count()):
-			var collision := get_slide_collision(i)
-			if collision.collider.is_in_group("players"):
-				_kicked = true
-				_enemy_overlap_area.monitoring = true
-				set_collision_mask_bit(_PLAYER_LAYER, false)
-				_velocity.x = speed
-				
-				# Stop the animation player so we don't expire.
-				# Also make sure the color is right and redraw,
-				# since it can be animated.
-				_anim_player.stop(true)
-				color = player.color
-				update()
-				
-				# Adjust direction based on if this was hit from left or right
-				if collision.position.x > global_position.x:
-					_moving_right = false
-					_velocity.x *= -1
-				else:
-					_moving_right = true
-
 	# Handle having been kicked already
 	else:
+		var prev_velocity_x = _velocity.x
 		_velocity.y += _gravity
 		_captured_enemy.rotation_degrees += _ROTATION_SPEED * delta \
 											* (-1 if _velocity.x < 0 else 1)
@@ -89,8 +65,21 @@ func _physics_process(delta):
 				_captured_enemy.damage(player)
 				queue_free()
 			else:
-				_moving_right = not _moving_right
-				_velocity.x = speed if _moving_right else -speed
+				_velocity.x = speed if prev_velocity_x<0 else -speed
+
+
+func kick(direction:Vector2)->void:
+	_kicked = true
+	_enemy_overlap_area.monitoring = true
+	set_collision_mask_bit(_PLAYER_LAYER, false)
+	_velocity.x = speed * direction.x
+	
+	# Stop the animation player so we don't expire.
+	# Also make sure the color is right and redraw,
+	# since it can be animated.
+	_anim_player.stop(true)
+	color = player.color
+	update()
 
 
 func capture(enemy:KinematicBody2D)->void:
