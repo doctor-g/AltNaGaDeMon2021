@@ -26,26 +26,13 @@ func _ready():
 		player.pawn = _spawn_player(i, false)
 		# warning-ignore:return_value_discarded	
 		player.connect("lives_changed", self, "_on_Player_lives_changed", [player])
-		$HUD/TopBar.add_child(player.make_hud())
 		
 	_run()
 
 
 # Run this level
 func _run():
-	var Slime := preload("res://Enemies/Slime/Slime.tscn")
-	yield(get_tree().create_timer(1.0), "timeout")
-	
-	_spawners[0].spawn(Slime, true)
-	_spawners[1].spawn(Slime, false)
-	yield(get_tree().create_timer(3.0), "timeout")
-	
-	_spawners[0].spawn(Slime, true)
-	_spawners[1].spawn(Slime, false)
-	
-	_spawning_complete = true
-	for spawner in _spawners:
-		spawner.expire()
+	assert(false, "Subclasses must override this function.")
 
 
 func _on_Spawner_enemy_spawned(enemy:Node2D)->void:

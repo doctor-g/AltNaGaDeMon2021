@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://Common/ConcertOne-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://World/bg_grasslands.png" type="Texture" id=3]
+[ext_resource path="res://World/HUD.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 72
@@ -84,6 +86,18 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 520, 377 )
+scale = Vector2( 1.48438, 1.48438 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HUD" parent="." instance=ExtResource( 4 )]
+margin_right = 1120.0
+margin_bottom = 700.0
 
 [node name="GameOverLabel" type="Label" parent="."]
 anchor_left = 0.5

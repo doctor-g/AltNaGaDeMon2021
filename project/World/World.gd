@@ -4,6 +4,11 @@ var num_players := 2
 
 var _players := []
 var _level_node : Node2D
+var _levels := [
+	load("res://World/Level00.tscn"),
+	load("res://World/Level01.tscn")
+]
+var _level_index := 0
 
 onready var _anim_player := $AnimationPlayer
 
@@ -12,20 +17,21 @@ func _ready():
 	for i in range(0,num_players):
 		var player = Player.new(i)
 		_players.append(player)
+		$HUD/TopBar.add_child(player.make_hud())
 		
 	# Make and configure the level
 	_start_next_level()
 
 
 func _start_next_level():
-	var new_level : Node2D= load("res://World/Level.tscn").instance()
+	var new_level : Node2D = _levels[_level_index % _levels.size()].instance()
 	new_level.players = _players
 	_level_node = new_level	
 	
-	# Add the child between frames and move it to the first position
+	# Add the child between frames and move it just under the background
 	# so that the endgame HUD will draw over it
 	call_deferred("add_child", new_level)
-	call_deferred("move_child", new_level, 0)
+	call_deferred("move_child", new_level, 1)
 	
 	# Connect signals to watch for finishing a level and game over.
 	# warning-ignore:return_value_discarded
@@ -36,6 +42,7 @@ func _start_next_level():
 
 func _on_Level_complete():
 	_level_node.queue_free()
+	_level_index += 1
 	_start_next_level()
 
 
