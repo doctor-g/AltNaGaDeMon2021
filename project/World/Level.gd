@@ -3,12 +3,14 @@ extends Node2D
 # Called when the level is complete
 signal complete
 
+# Called when the level ends due to players' losing all lives
+signal game_over
+
 var players := []
 
 var _enemies := 0
 var _spawning_complete := false
 
-onready var _game_over_label := $HUD/GameOverLabel
 onready var _spawners = $Spawners.get_children()
 
 func _ready():
@@ -68,7 +70,7 @@ func _spawn_player(index:int, invincible: bool)->Pawn:
 
 func _on_Player_lives_changed(_new_lives:int, player:Player)->void:
 	if player.lives > 0:
-		# warning-ignore:return_value_discarded		
+		# warning-ignore:return_value_discarded
 		player.pawn = _spawn_player(player.index, true)
 		
 	var any_lives = false
@@ -77,4 +79,4 @@ func _on_Player_lives_changed(_new_lives:int, player:Player)->void:
 			any_lives = true
 			break
 	if not any_lives:
-		_game_over_label.visible = true
+		emit_signal("game_over")

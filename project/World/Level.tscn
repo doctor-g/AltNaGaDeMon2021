@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/grass.png" type="Texture" id=1]
 [ext_resource path="res://World/Level.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Spawner/Spawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/bg_grasslands.png" type="Texture" id=6]
 [ext_resource path="res://World/HUD.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Common/ConcertOne-Regular.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 70, 70, 0, 70, 0, 0, 70, 0 )
@@ -58,13 +57,6 @@ points = PoolVector2Array( 70, 70, 0, 70, 0, 0, 70, 0 )
 } ]
 1/z_index = 0
 
-[sub_resource type="DynamicFont" id=4]
-size = 72
-outline_size = 3
-outline_color = Color( 0.0470588, 0.603922, 0.694118, 1 )
-use_filter = true
-font_data = ExtResource( 8 )
-
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -88,24 +80,6 @@ __meta__ = {
 [node name="HUD" parent="." instance=ExtResource( 7 )]
 margin_right = 1120.0
 margin_bottom = 700.0
-
-[node name="GameOverLabel" type="Label" parent="HUD"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -227.0
-margin_top = -52.5
-margin_right = 227.0
-margin_bottom = 52.5
-custom_fonts/font = SubResource( 4 )
-text = "Game Over"
-align = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
 
 [node name="SpawnPoints" type="Node" parent="."]
 
