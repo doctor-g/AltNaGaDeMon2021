@@ -7,7 +7,7 @@ signal score_changed(new_score)
 signal lives_changed(new_lives)
 
 var index := -1 
-var lives := 1 setget _set_lives
+var lives := 3 setget _set_lives
 var score := 0 setget _set_score
 var pawn setget _set_pawn
 var color 
