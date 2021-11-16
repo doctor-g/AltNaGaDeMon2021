@@ -7,6 +7,8 @@ const _ROTATION_SPEED := 600 # degrees per second
 
 const _WARNING_COLOR := Color.yellow
 
+enum Direction { NONE, LEFT, RIGHT, DOWN_THEN_RIGHT, DOWN_THEN_LEFT }
+
 export var speed := 600
 
 # How many bounces before the orb disappears
@@ -21,6 +23,8 @@ var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
 var _kicked := false
 var _bounces := 0
+
+var _direction = Direction.NONE
 
 var _captured_enemy : KinematicBody2D = null
 
@@ -50,14 +54,12 @@ func _physics_process(delta):
 		
 	# Handle having been kicked already
 	else:
-		var prev_velocity_x = _velocity.x
 		_velocity.y += _gravity
 		_captured_enemy.rotation_degrees += _ROTATION_SPEED * delta \
 											* (-1 if _velocity.x < 0 else 1)
 		_velocity = move_and_slide(_velocity, Vector2.UP)
-		
-		# Bounce off of walls
-		if is_on_wall():
+
+		if is_on_wall() and (_direction==Direction.LEFT or _direction==Direction.RIGHT):
 			_bounces += 1
 			if _bounces >= max_bounces:
 				# Destroy the contained enemy, which should trigger
@@ -65,7 +67,16 @@ func _physics_process(delta):
 				_captured_enemy.damage(player)
 				queue_free()
 			else:
-				_velocity.x = speed if prev_velocity_x<0 else -speed
+				_direction = Direction.DOWN_THEN_LEFT \
+					if _direction == Direction.RIGHT else Direction.DOWN_THEN_RIGHT
+		
+		elif is_on_floor() and _direction==Direction.DOWN_THEN_LEFT:
+			_direction = Direction.LEFT
+			_velocity.x = -speed
+		
+		elif is_on_floor() and _direction==Direction.DOWN_THEN_RIGHT:
+			_direction = Direction.RIGHT
+			_velocity.x = speed
 
 
 func kick(direction:Vector2)->void:
@@ -73,6 +84,8 @@ func kick(direction:Vector2)->void:
 	_enemy_overlap_area.monitoring = true
 	set_collision_mask_bit(_PLAYER_LAYER, false)
 	_velocity.x = speed * direction.x
+	
+	_direction = Direction.LEFT if direction.x < 0 else Direction.RIGHT
 	
 	# Stop the animation player so we don't expire.
 	# Also make sure the color is right and redraw,
