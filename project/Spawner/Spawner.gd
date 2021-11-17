@@ -2,8 +2,6 @@ extends Node2D
 
 signal enemy_spawned(enemy)
 
-const _SLIME := preload("res://Enemies/Slime/Slime.tscn")
-
 # These constants are tied to the export values for facing below.
 const _LEFT := 0
 const _RIGHT := 1

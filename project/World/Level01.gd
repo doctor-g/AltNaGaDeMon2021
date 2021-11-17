@@ -1,7 +1,7 @@
 extends "Level.gd"
 
 func _run():
-	var Slime := preload("res://Enemies/Slime/Slime.tscn")
+	var Slime := _GREEN_SLIME
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	_spawners[0].spawn(Slime, true)
