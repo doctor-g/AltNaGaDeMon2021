@@ -18,8 +18,8 @@ var _velocity := Vector2.ZERO
 var _dead := false
 var _dancing := false
 var _action_prefix : String
-var _sprite : AnimatedSprite
 
+onready var _sprite : AnimatedSprite = $SpriteContainer/PawnSprite
 onready var _anim_player := $AnimationPlayer
 onready var _damageable_area := $DamageableArea
 onready var _invincibility_timer := $InvincibilityTimer
@@ -29,16 +29,12 @@ func _ready():
 	assert(player!=null, "Player must be specified")
 	
 	_action_prefix = "p%d_" % (index + 1)
+	$SpriteContainer/PawnSprite.index = index	
 	
-	# Use the right animated sprite based on the player index
-	for i in range(0,_sprite_container.get_child_count()):
-		var child : AnimatedSprite = _sprite_container.get_children()[i]
-		if i == index:
-			_sprite = child
-			_sprite.visible = true
-		else:
-			child.visible = false
-	
+	# Reset the animation tracks, e.g. to undo the material animation
+	# from teleporting out.
+	_anim_player.play("RESET")
+
 	if start_invincible:
 		_invincibility_timer.start()
 		_sprite.modulate = Color(1,1,1,0.4)
@@ -111,6 +107,8 @@ func play_hurt_animation():
 func dance():
 	_dancing = true
 	_sprite.play("dance")
+	yield(get_tree().create_timer(0.5), "timeout")
+	_anim_player.play("teleport-out")
 
 
 # This is called when an enemy crosses into the damageable area of the player.

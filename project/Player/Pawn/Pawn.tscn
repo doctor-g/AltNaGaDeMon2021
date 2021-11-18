@@ -1,103 +1,48 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Pawn/Pawn.gd" type="Script" id=1]
-[ext_resource path="res://Player/Pawn/P1Images/p1_walk04.png" type="Texture" id=2]
-[ext_resource path="res://Player/Pawn/P1Images/p1_walk03.png" type="Texture" id=3]
-[ext_resource path="res://Player/Pawn/P1Images/p1_walk05.png" type="Texture" id=4]
-[ext_resource path="res://Player/Pawn/P1Images/p1_walk07.png" type="Texture" id=5]
-[ext_resource path="res://Player/Pawn/P1Images/p1_walk09.png" type="Texture" id=6]
-[ext_resource path="res://Player/Pawn/P1Images/p1_walk06.png" type="Texture" id=7]
-[ext_resource path="res://Player/Pawn/P1Images/p1_walk02.png" type="Texture" id=8]
-[ext_resource path="res://Player/Pawn/P1Images/p1_stand.png" type="Texture" id=9]
-[ext_resource path="res://Player/Pawn/P1Images/p1_walk01.png" type="Texture" id=10]
-[ext_resource path="res://Player/Pawn/P1Images/p1_walk10.png" type="Texture" id=11]
-[ext_resource path="res://Player/Pawn/P1Images/p1_walk11.png" type="Texture" id=12]
-[ext_resource path="res://Player/Pawn/P1Images/p1_walk08.png" type="Texture" id=13]
+[ext_resource path="res://Player/Pawn/PawnSprite.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Pawn/player_collision_shape.tres" type="Shape2D" id=14]
-[ext_resource path="res://Player/Pawn/P1Images/p1_jump.png" type="Texture" id=15]
-[ext_resource path="res://Player/Pawn/P1Images/p1_duck.png" type="Texture" id=16]
-[ext_resource path="res://Player/Pawn/P1Images/p1_hurt.png" type="Texture" id=17]
-[ext_resource path="res://Player/Pawn/P2Images/p3_walk06.png" type="Texture" id=18]
-[ext_resource path="res://Player/Pawn/P2Images/p3_walk07.png" type="Texture" id=19]
-[ext_resource path="res://Player/Pawn/P2Images/p3_walk11.png" type="Texture" id=20]
-[ext_resource path="res://Player/Pawn/P2Images/p3_walk09.png" type="Texture" id=21]
-[ext_resource path="res://Player/Pawn/P2Images/p3_walk05.png" type="Texture" id=22]
-[ext_resource path="res://Player/Pawn/P2Images/p3_walk04.png" type="Texture" id=23]
-[ext_resource path="res://Player/Pawn/P2Images/p3_jump.png" type="Texture" id=24]
-[ext_resource path="res://Player/Pawn/P2Images/p3_walk02.png" type="Texture" id=25]
-[ext_resource path="res://Player/Pawn/P2Images/p3_walk03.png" type="Texture" id=26]
-[ext_resource path="res://Player/Pawn/P2Images/p3_walk01.png" type="Texture" id=27]
-[ext_resource path="res://Player/Pawn/P2Images/p3_walk08.png" type="Texture" id=28]
-[ext_resource path="res://Player/Pawn/P2Images/p3_stand.png" type="Texture" id=29]
-[ext_resource path="res://Player/Pawn/P2Images/p3_walk10.png" type="Texture" id=30]
-[ext_resource path="res://Player/Pawn/P2Images/p3_duck.png" type="Texture" id=31]
-[ext_resource path="res://Player/Pawn/P2Images/p3_hurt.png" type="Texture" id=32]
+[ext_resource path="res://Player/Pawn/laserYellowBurst.png" type="Texture" id=33]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 9 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 15 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "dance",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 13 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 12 ) ],
-"loop": true,
-"name": "walk",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 17 ) ],
-"loop": true,
-"name": "hurt",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 16 ) ],
-"loop": true,
-"name": "duck",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 15 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ ExtResource( 29 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 24 ), ExtResource( 29 ) ],
-"loop": true,
-"name": "dance",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 27 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 23 ), ExtResource( 22 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 28 ), ExtResource( 21 ), ExtResource( 30 ), ExtResource( 20 ) ],
-"loop": true,
-"name": "walk",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 32 ) ],
-"loop": true,
-"name": "hurt",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 31 ) ],
-"loop": true,
-"name": "duck",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 24 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-} ]
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TeleportParticles:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/PawnSprite:material:shader_param/fade_percent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TeleportParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "dead"
@@ -140,6 +85,45 @@ tracks/2/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=7]
+resource_name = "teleport-out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TeleportParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TeleportParticles:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -91 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/PawnSprite:material:shader_param/fade_percent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
 [node name="Pawn" type="KinematicBody2D" groups=["players"]]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -150,20 +134,7 @@ shape = ExtResource( 14 )
 
 [node name="SpriteContainer" type="Node2D" parent="."]
 
-[node name="P1AnimatedSprite" type="AnimatedSprite" parent="SpriteContainer"]
-pause_mode = 2
-position = Vector2( 0, -46 )
-frames = SubResource( 1 )
-animation = "dance"
-frame = 1
-playing = true
-
-[node name="P2AnimatedSprite" type="AnimatedSprite" parent="SpriteContainer"]
-pause_mode = 2
-visible = false
-position = Vector2( 0, -46 )
-frames = SubResource( 3 )
-animation = "dance"
+[node name="PawnSprite" parent="SpriteContainer" instance=ExtResource( 2 )]
 
 [node name="ProjectileLaunchPoint" type="Node2D" parent="."]
 position = Vector2( 0, -31 )
@@ -177,7 +148,9 @@ position = Vector2( -2, -46.25 )
 shape = ExtResource( 14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 6 )
 anims/dead = SubResource( 2 )
+anims/teleport-out = SubResource( 7 )
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -185,6 +158,25 @@ one_shot = true
 __meta__ = {
 "_editor_description_": "For use when respawning"
 }
+
+[node name="TeleportParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 25
+lifetime = 0.2
+local_coords = false
+texture = ExtResource( 33 )
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 0 )
+direction = Vector2( 0, -1 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 400.0
+initial_velocity_random = 0.2
+angle = 180.0
+angle_random = 1.0
+scale_amount = 0.2
+hue_variation = 0.1
+hue_variation_random = 0.5
 
 [connection signal="body_entered" from="DamageableArea" to="." method="_on_DamageableArea_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
