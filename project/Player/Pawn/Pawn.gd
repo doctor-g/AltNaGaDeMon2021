@@ -16,6 +16,7 @@ var index := 0
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
 var _dead := false
+var _dancing := false
 var _action_prefix : String
 var _sprite : AnimatedSprite
 
@@ -45,7 +46,7 @@ func _ready():
 		
 
 func _physics_process(_delta):
-	if _dead:
+	if _dead or _dancing:
 		return
 	
 	_velocity.y += _gravity
@@ -104,6 +105,12 @@ func _process_movement_input()->void:
 # Play the hurt animation of the current sprite
 func play_hurt_animation():
 	_sprite.play("hurt")
+	
+
+# Play the dance animation
+func dance():
+	_dancing = true
+	_sprite.play("dance")
 
 
 # This is called when an enemy crosses into the damageable area of the player.

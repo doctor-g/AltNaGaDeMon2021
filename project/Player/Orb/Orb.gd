@@ -131,8 +131,9 @@ func toggle_color():
 # When this sensor is active and runs into an enemy,
 # that means the orb was kicked, and we should damage
 # the enemy we hit
-func _on_EnemyOverlapArea_body_entered(body):
-	body.damage(player)
+func _on_EnemyOverlapArea_body_entered(body:Node2D):
+	if body.has_method("damage"):
+		body.damage(player)
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):

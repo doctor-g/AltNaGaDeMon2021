@@ -51,6 +51,8 @@ func _on_Enemy_destroyed()->void:
 	
 func _check_end_of_level()->void:
 	if _enemies==0 and _spawning_complete:
+		for player in players:
+			player.pawn.dance()
 		emit_signal("complete")
 
 

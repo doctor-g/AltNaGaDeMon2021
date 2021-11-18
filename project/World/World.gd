@@ -1,5 +1,7 @@
 extends Control
 
+export var dance_duration := 2.0
+
 var num_players := 2
 
 var _players := []
@@ -41,6 +43,7 @@ func _start_next_level():
 
 
 func _on_Level_complete():
+	yield(get_tree().create_timer(dance_duration), "timeout")
 	_level_node.queue_free()
 	_level_index += 1
 	_start_next_level()
