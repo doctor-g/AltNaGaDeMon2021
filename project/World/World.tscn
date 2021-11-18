@@ -142,5 +142,7 @@ margin_right = 83.0
 margin_bottom = 52.0
 text = "Main Menu"
 
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="pressed" from="ButtonBox/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
 [connection signal="pressed" from="ButtonBox/MenuButton" to="." method="_on_MenuButton_pressed"]

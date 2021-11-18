@@ -28,7 +28,14 @@ func _ready():
 func _start_next_level():
 	var new_level : Node2D = _levels[_level_index % _levels.size()].instance()
 	new_level.players = _players
-	_level_node = new_level	
+	
+	# If there is an old level, fly in the new level, then remove the old level.
+	if _level_node:
+		new_level.position.y = get_viewport_rect().size.y
+		$Tween.interpolate_property(new_level, "position", new_level.position, Vector2.ZERO, 1.0)
+		$Tween.start()
+	
+	_level_node = new_level
 	
 	# Add the child between frames and move it just under the background
 	# so that the endgame HUD will draw over it
@@ -43,6 +50,8 @@ func _start_next_level():
 
 
 func _on_Level_complete():
+	for player in _players:
+		player.pawn.dance()
 	yield(get_tree().create_timer(dance_duration), "timeout")
 	_level_node.queue_free()
 	_level_index += 1
