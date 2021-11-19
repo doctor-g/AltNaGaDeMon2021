@@ -1,1 +1,4 @@
-.import
+project/.import
+
+# Ignore LMMS backup files
+raw_assets/*bak
