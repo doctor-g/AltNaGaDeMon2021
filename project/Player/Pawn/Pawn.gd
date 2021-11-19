@@ -40,6 +40,11 @@ func _ready():
 		_sprite.modulate = Color(1,1,1,0.4)
 		_damageable_area.monitoring = false
 		
+	# If we're not starting invicible, it should be the start of the
+	# round, so teleport in
+	else:
+		_anim_player.play("teleport-in")
+		
 
 func _physics_process(_delta):
 	if _dead or _dancing:
