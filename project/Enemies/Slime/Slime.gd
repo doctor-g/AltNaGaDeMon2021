@@ -42,7 +42,7 @@ func damage(source)->void:
 	var points_popup = preload("res://Enemies/PointsPopup.tscn").instance()
 	points_popup.color = source.color
 	points_popup.points = points
-	get_parent().add_child(points_popup)
+	get_tree().get_root().add_child(points_popup)
 	points_popup.set_as_toplevel(true)
 	points_popup.position = global_position
 	
