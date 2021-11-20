@@ -32,7 +32,7 @@ func _ready():
 	for i in range(0,players.size()):
 		var player = players[i]
 		if player.lives > 0:
-			player.pawn = _spawn_player(i, false)
+			player.pawn = _spawn_pawn(i, false)
 			# warning-ignore:return_value_discarded	
 			player.connect("lives_changed", self, "_on_Player_lives_changed", [player])
 	
@@ -53,7 +53,7 @@ func _on_Spawner_enemy_spawned(enemy:Node2D)->void:
 	
 	# Watch for when the enemy is destroyed
 	# warning-ignore:return_value_discarded
-	enemy.connect("destroyed", self, "_on_Enemy_destroyed")
+	enemy.connect("destroyed", self, "_on_Enemy_destroyed", [], CONNECT_ONESHOT)
 	
 
 func _on_Spawner_tree_exited()->void:
@@ -72,11 +72,12 @@ func _on_Enemy_destroyed()->void:
 	
 	
 func _check_end_of_level()->void:
+	assert(_enemies >= 0, "Counted negative enemies.")
 	if _enemies==0 and _active_spawners==0:
 		emit_signal("complete")
 
 
-func _spawn_player(index:int, invincible: bool)->Pawn:
+func _spawn_pawn(index:int, invincible: bool)->Pawn:
 	var pawn : Pawn = preload("res://Player/Pawn/Pawn.tscn").instance()
 	pawn.player = players[index]
 	pawn.index = index
@@ -87,9 +88,10 @@ func _spawn_player(index:int, invincible: bool)->Pawn:
 
 
 func _on_Player_lives_changed(_new_lives:int, player:Player)->void:
+	print("LIVES CHANGED")
 	if player.lives > 0:
 		# warning-ignore:return_value_discarded
-		player.pawn = _spawn_player(player.index, true)
+		player.pawn = _spawn_pawn(player.index, true)
 		
 	# If no one has any lives left, trigger game_over
 	var any_lives = false

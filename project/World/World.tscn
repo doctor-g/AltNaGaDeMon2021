@@ -146,3 +146,4 @@ text = "Main Menu"
 
 [connection signal="pressed" from="ButtonBox/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
 [connection signal="pressed" from="ButtonBox/MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]

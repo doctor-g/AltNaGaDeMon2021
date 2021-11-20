@@ -35,8 +35,9 @@ func _set_lives(value:int)->void:
 
 func _set_pawn(value)->void:
 	pawn = value
-	# warning-ignore:return_value_discarded
-	pawn.connect("dead", self, "_on_Pawn_dead")
+	if pawn!=null:
+		# warning-ignore:return_value_discarded
+		pawn.connect("dead", self, "_on_Pawn_dead")
 
 
 func _on_Pawn_dead():

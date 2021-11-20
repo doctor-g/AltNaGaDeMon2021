@@ -1,5 +1,7 @@
 extends Control
 
+const _MAX_PLAYERS := 2
+
 export var dance_duration := 2.0
 
 var num_players := 2
@@ -11,10 +13,13 @@ var _levels := [
 	load("res://World/Level01.tscn")
 ]
 var _level_index := 0
+var _old_level : Node2D
 
 onready var _anim_player := $AnimationPlayer
 
 func _ready():
+	assert(num_players > 0 and num_players <= _MAX_PLAYERS)
+	
 	# Instantiate the players
 	for i in range(0,num_players):
 		var player = Player.new(i)
@@ -31,6 +36,7 @@ func _start_next_level():
 	
 	# If there is an old level, fly in the new level, then remove the old level.
 	if _level_node:
+		_old_level = _level_node
 		var viewport_height := get_viewport_rect().size.y
 		$Tween.interpolate_property(_level_node, "position", null, Vector2(0, -viewport_height), 1.0)
 		new_level.position.y = get_viewport_rect().size.y
@@ -82,3 +88,9 @@ func _on_PlayAgainButton_pressed():
 func _on_MenuButton_pressed():
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Screens/MainMenu.tscn")
+
+
+# This should be called when the level transition is complete, so then
+# we free the previous level
+func _on_Tween_tween_all_completed():
+	_old_level.queue_free()
