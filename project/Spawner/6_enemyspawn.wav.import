@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/6_enemyspawn.wav-3d80159a1b102e283ca2035d7cf68737.sample"
+
+[deps]
+
+source_file="res://Spawner/6_enemyspawn.wav"
+dest_files=[ "res://.import/6_enemyspawn.wav-3d80159a1b102e283ca2035d7cf68737.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
