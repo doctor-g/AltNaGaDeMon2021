@@ -227,7 +227,7 @@ position = Vector2( 0, -31 )
 
 [node name="DamageableArea" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageableArea"]
 position = Vector2( -2, -46.25 )

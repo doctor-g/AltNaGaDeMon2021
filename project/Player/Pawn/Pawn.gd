@@ -127,7 +127,7 @@ func dance():
 # apart.
 func _on_DamageableArea_body_entered(body:Node2D):
 	# Make sure it's an enemy and not the orb as described above.
-	if body.is_in_group("enemies"):
+	if body.is_in_group("enemies") or body.is_in_group("fireball"):
 		_dead = true
 		_sprite.stop()
 		$StandingCollision.set_deferred("disabled", true)
