@@ -5,8 +5,10 @@ const _FIREBALL := preload("res://Enemies/Slime/Fireball.tscn")
 export var impulse := 280.0
 
 onready var _fireball_timer := $FireballTimer
+onready var _fireball_sound := $FireballSound
 
 func _on_FireballTimer_timeout():
+	_fireball_sound.play()
 	var fireball : RigidBody2D = _FIREBALL.instance()
 	get_parent().add_child(fireball)
 	fireball.global_position = global_position

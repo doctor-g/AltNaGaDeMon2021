@@ -24,6 +24,8 @@ onready var _anim_player := $AnimationPlayer
 onready var _damageable_area := $DamageableArea
 onready var _invincibility_timer := $InvincibilityTimer
 onready var _sprite_container := $SpriteContainer
+onready var _shoot_sound := $ShootSound
+onready var _jump_sound := $JumpSound
 
 func _ready():
 	assert(player!=null, "Player must be specified")
@@ -89,6 +91,7 @@ func _process_movement_input()->void:
 		
 	if is_on_floor() and Input.is_action_just_pressed(_action("jump")):
 		_velocity.y -= jump_strength
+		_jump_sound.play()
 	
 	if not is_on_floor():
 		_sprite.play("jump")
@@ -96,6 +99,7 @@ func _process_movement_input()->void:
 		_sprite.play("walk" if _velocity.x != 0 else "idle")
 	
 	if Input.is_action_just_pressed(_action("fire")):
+		_shoot_sound.play()
 		var projectile := _PROJECTILE.instance()
 		projectile.player = player
 		projectile.direction = Vector2.LEFT if _sprite.flip_h else Vector2.RIGHT

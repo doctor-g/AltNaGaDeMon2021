@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/jump.wav-089530d3efd7b33fa2637f6b2e379170.sample"
+
+[deps]
+
+source_file="res://Player/Pawn/jump.wav"
+dest_files=[ "res://.import/jump.wav-089530d3efd7b33fa2637f6b2e379170.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player/Orb/Orb.gd" type="Script" id=1]
 [ext_resource path="res://Player/Orb/orb_collision_shape.tres" type="Shape2D" id=2]
+[ext_resource path="res://Player/Orb/487532__ranner__bubble-sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://Player/Orb/1_kick.wav" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "captured-and-releasing"
@@ -58,6 +60,12 @@ shape = ExtResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "captured-and-releasing"
 anims/captured-and-releasing = SubResource( 1 )
+
+[node name="AppearSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="KickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="body_entered" from="EnemyOverlapArea" to="." method="_on_EnemyOverlapArea_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

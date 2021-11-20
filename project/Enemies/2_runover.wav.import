@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/2_runover.wav-51cbfa7858ac14881bcf38e97305379e.sample"
+
+[deps]
+
+source_file="res://Enemies/2_runover.wav"
+dest_files=[ "res://.import/2_runover.wav-51cbfa7858ac14881bcf38e97305379e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

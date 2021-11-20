@@ -35,11 +35,14 @@ var _enemy_mask : int
 
 onready var _enemy_overlap_area := $EnemyOverlapArea
 onready var _anim_player := $AnimationPlayer
+onready var _appear_sound := $AppearSound
+onready var _kick_sound := $KickSound
 
 
 func _ready():
 	assert(player!=null, "Player must be specified")
 	color = player.color
+	_appear_sound.play()
 
 
 func _draw():
@@ -60,6 +63,7 @@ func _physics_process(delta):
 		_velocity = move_and_slide(_velocity, Vector2.UP)
 
 		if is_on_wall() and (_direction==Direction.LEFT or _direction==Direction.RIGHT):
+			_kick_sound.play()
 			_bounces += 1
 			if _bounces >= max_bounces:
 				_destroy()
@@ -92,6 +96,8 @@ func _destroy():
 
 
 func kick(direction:Vector2)->void:
+	_kick_sound.play()
+	
 	_kicked = true
 	_enemy_overlap_area.monitoring = true
 	set_collision_mask_bit(_PLAYER_LAYER, false)

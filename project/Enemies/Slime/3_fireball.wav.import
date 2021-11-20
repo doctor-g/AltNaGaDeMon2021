@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/3_fireball.wav-2db120b03b8ce9bdd2f4cc3e2ae2946c.sample"
+
+[deps]
+
+source_file="res://Enemies/Slime/3_fireball.wav"
+dest_files=[ "res://.import/3_fireball.wav-2db120b03b8ce9bdd2f4cc3e2ae2946c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

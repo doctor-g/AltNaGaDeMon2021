@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/laserSmall_001.wav-b3ebfff200ddd56361f75fc568f72bca.sample"
+
+[deps]
+
+source_file="res://Player/Pawn/laserSmall_001.wav"
+dest_files=[ "res://.import/laserSmall_001.wav-b3ebfff200ddd56361f75fc568f72bca.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

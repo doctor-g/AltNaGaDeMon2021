@@ -12,7 +12,6 @@ var captured := false setget _set_captured
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
 
-
 onready var _sprite := $AnimatedSprite
 onready var _anim_player := $AnimationPlayer
 
