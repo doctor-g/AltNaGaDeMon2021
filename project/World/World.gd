@@ -50,9 +50,13 @@ func _start_next_level():
 
 
 func _on_Level_complete():
+	# Make the surviving pawns dance
 	for player in _players:
-		player.pawn.dance()
+		if player.lives > 0:
+			player.pawn.dance()
+	
 	yield(get_tree().create_timer(dance_duration), "timeout")
+	
 	_level_node.queue_free()
 	_level_index += 1
 	_start_next_level()

@@ -30,9 +30,10 @@ func _ready():
 	# Spawn the pawns
 	for i in range(0,players.size()):
 		var player = players[i]
-		player.pawn = _spawn_player(i, false)
-		# warning-ignore:return_value_discarded	
-		player.connect("lives_changed", self, "_on_Player_lives_changed", [player])
+		if player.lives > 0:
+			player.pawn = _spawn_player(i, false)
+			# warning-ignore:return_value_discarded	
+			player.connect("lives_changed", self, "_on_Player_lives_changed", [player])
 		
 	_run()
 
@@ -79,6 +80,7 @@ func _on_Player_lives_changed(_new_lives:int, player:Player)->void:
 		# warning-ignore:return_value_discarded
 		player.pawn = _spawn_player(player.index, true)
 		
+	# If no one has any lives left, trigger game_over
 	var any_lives = false
 	for i in range(0,players.size()):
 		if players[i].lives > 0:

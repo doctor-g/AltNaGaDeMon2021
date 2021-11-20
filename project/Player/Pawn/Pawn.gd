@@ -104,7 +104,7 @@ func _process_movement_input()->void:
 
 
 # Play the hurt animation of the current sprite
-func play_hurt_animation():
+func _play_hurt_animation():
 	_sprite.play("hurt")
 	
 
@@ -134,6 +134,7 @@ func _on_DamageableArea_body_entered(body:Node2D):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name=="dead":
 		emit_signal("dead")
+		queue_free()
 
 
 func _on_InvincibilityTimer_timeout():
