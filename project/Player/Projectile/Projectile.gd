@@ -8,8 +8,13 @@ export var speed := 350
 var player
 var direction := Vector2.ZERO
 
+onready var _sprite := $Sprite
+onready var _emitter := $CPUParticles2D
+
 func _ready():
 	assert(player!=null, "Player must be specified")
+	_sprite.modulate = player.color
+	_emitter.color = player.color
 
 
 func _physics_process(_delta):
