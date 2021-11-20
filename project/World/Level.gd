@@ -88,7 +88,6 @@ func _spawn_pawn(index:int, invincible: bool)->Pawn:
 
 
 func _on_Player_lives_changed(_new_lives:int, player:Player)->void:
-	print("LIVES CHANGED")
 	if player.lives > 0:
 		# warning-ignore:return_value_discarded
 		player.pawn = _spawn_pawn(player.index, true)
