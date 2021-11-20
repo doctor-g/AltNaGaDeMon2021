@@ -12,7 +12,7 @@ signal game_over
 var players := []
 
 var _enemies := 0
-var _spawning_complete := false
+var _active_spawners := 0
 
 onready var _spawners = $Spawners.get_children()
 
@@ -20,8 +20,12 @@ func _ready():
 	assert(not players.empty(), "players variable must be set")
 	
 	for spawner in $Spawners.get_children():
-		# warning-ignore:return_value_discarded	
+		_active_spawners += 1
+		# warning-ignore:return_value_discarded
 		spawner.connect("enemy_spawned", self, "_on_Spawner_enemy_spawned")
+		# warning-ignore:return_value_discarded
+		spawner.connect("tree_exited", self, "_on_Spawner_tree_exited")
+		
 	
 	# Spawn the pawns
 	for i in range(0,players.size()):
@@ -40,9 +44,15 @@ func _run():
 
 func _on_Spawner_enemy_spawned(enemy:Node2D)->void:
 	_enemies += 1
+	
+	# Watch for when the enemy is destroyed
 	# warning-ignore:return_value_discarded
 	enemy.connect("destroyed", self, "_on_Enemy_destroyed")
 	
+
+func _on_Spawner_tree_exited()->void:
+	_active_spawners -= 1
+
 
 func _on_Enemy_destroyed()->void:
 	_enemies -= 1
@@ -50,7 +60,7 @@ func _on_Enemy_destroyed()->void:
 	
 	
 func _check_end_of_level()->void:
-	if _enemies==0 and _spawning_complete:
+	if _enemies==0 and _active_spawners==0:
 		emit_signal("complete")
 
 
