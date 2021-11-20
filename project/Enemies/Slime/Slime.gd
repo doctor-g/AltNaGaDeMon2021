@@ -11,6 +11,11 @@ var captured := false setget _set_captured
 
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
+# Stored value of velocity.x during capture.
+# It can be reset when being uncaptured
+var _previous_x := 0.0
+var _previous_layer : int
+var _previous_mask : int
 
 onready var _sprite := $AnimatedSprite
 onready var _anim_player := $AnimationPlayer
@@ -55,7 +60,24 @@ func _set_captured(value:bool)->void:
 	captured = value
 	if captured:
 		_anim_player.play("captured")
+		
+		# Store info for later restoration if uncaptured
+		_previous_x = _velocity.x
+		_previous_layer = collision_layer
+		_previous_mask = collision_mask
+		
+		# Stop horizontal movement
+		_velocity.x = 0
+		
+		# Captured enemies don't collide with anything
+		collision_mask = 0
+		collision_layer = 0
 	else:
-		# Reset animated values and then stop the animation
 		_anim_player.stop()
 		_anim_player.play("RESET")
+		_velocity.x = _previous_x
+		
+		# Restore collision settings
+		collision_layer = _previous_layer
+		collision_mask = _previous_mask
+	

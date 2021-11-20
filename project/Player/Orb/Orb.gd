@@ -30,8 +30,6 @@ var _captured_enemy : KinematicBody2D = null
 
 # These allow us to store values that can be restored if the enemy is released
 var _enemy_parent : Node2D = null
-var _enemy_layer : int
-var _enemy_mask : int
 
 onready var _enemy_overlap_area := $EnemyOverlapArea
 onready var _anim_player := $AnimationPlayer
@@ -116,15 +114,12 @@ func kick(direction:Vector2)->void:
 func capture(enemy:KinematicBody2D)->void:
 	assert(not enemy.captured, "Enemy already captured!")
 	_captured_enemy = enemy
+	
+	# Store values that can be used if this enemy is dropped (uncaptured)
 	_enemy_parent = enemy.get_parent()
-	_enemy_layer = enemy.collision_layer
-	_enemy_mask = enemy.collision_mask
 	
-	enemy.collision_mask = 0
-	enemy.collision_layer = 0
 	enemy.captured = true
-	
-	# Need to store the position because reparenting
+	# Reparent the enemy to the orb
 	var enemy_position := enemy.global_position
 	_enemy_parent.remove_child(enemy)
 	add_child(enemy)
@@ -161,11 +156,7 @@ func _on_AnimationPlayer_animation_finished(_anim_name):
 	_enemy_parent.add_child(_captured_enemy)
 	_captured_enemy.global_position = pos
 	_captured_enemy.captured = false
-	
-	# Restore collision settings
-	_captured_enemy.collision_layer = _enemy_layer
-	_captured_enemy.collision_mask = _enemy_mask
-	
+
 	# Clear instance variables. Maybe not necessary, but it
 	# seems like it should help the garbage collector.
 	_captured_enemy = null

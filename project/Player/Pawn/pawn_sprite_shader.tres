@@ -14,4 +14,4 @@ void fragment() {
 
 [resource]
 shader = SubResource( 1 )
-shader_param/fade_percent = 0.0
+shader_param/fade_percent = 1.0
