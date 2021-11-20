@@ -3,10 +3,10 @@ extends Node2D
 const _GREEN_SLIME := preload("res://Enemies/Slime/GreenSlime.tscn")
 const _PINK_SLIME := preload("res://Enemies/Slime/PinkSlime.tscn")
 
-# Called when the level is complete
+# Sent when the level is complete
 signal complete
 
-# Called when the level ends due to players' losing all lives
+# Sent when the level ends due to players' losing all lives
 signal game_over
 
 var players := []
