@@ -62,10 +62,7 @@ func _physics_process(delta):
 		if is_on_wall() and (_direction==Direction.LEFT or _direction==Direction.RIGHT):
 			_bounces += 1
 			if _bounces >= max_bounces:
-				# Destroy the contained enemy, which should trigger
-				# a change in player score.
-				_captured_enemy.damage(player)
-				queue_free()
+				_destroy()
 			else:
 				_direction = Direction.DOWN_THEN_LEFT \
 					if _direction == Direction.RIGHT else Direction.DOWN_THEN_RIGHT
@@ -77,6 +74,21 @@ func _physics_process(delta):
 		elif is_on_floor() and _direction==Direction.DOWN_THEN_RIGHT:
 			_direction = Direction.RIGHT
 			_velocity.x = speed
+		
+	# Whether kicked or not, if we hit an orb, destroy this orb
+	# and the other
+	for i in get_slide_count():
+		var collision := get_slide_collision(i)
+		var collider : Node2D = collision.collider
+		if collider.is_in_group("orbs"):
+			_destroy()
+			collider._destroy()
+
+
+func _destroy():
+	# Damaging the captured enemy should create an increase in player score.
+	_captured_enemy.damage(player)
+	queue_free()
 
 
 func kick(direction:Vector2)->void:
