@@ -1,12 +1,11 @@
 extends "Level.gd"
 
 func _run():
-	var Slime := _GREEN_SLIME
 	yield(get_tree().create_timer(1.0), "timeout")
 	
-	_spawners[0].spawn(Slime, true)
-	_spawners[1].spawn(Slime, false)
+	_spawners[0].spawn(_GREEN_SLIME, true)
+	_spawners[1].spawn(_GREEN_SLIME, false)
 	yield(get_tree().create_timer(3.0), "timeout")
 	
-	_spawners[0].spawn(Slime, true, true)
-	_spawners[1].spawn(Slime, false, true)
+	_spawners[0].spawn(_GREEN_SLIME, true, true)
+	_spawners[1].spawn(_GREEN_SLIME, false, true)
