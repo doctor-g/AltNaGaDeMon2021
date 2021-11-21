@@ -38,8 +38,8 @@ func _physics_process(_delta):
 		_sprite.flip_h = direction.x > 0
 
 
-# Damage the enemy, with the damage coming from the given source (pawn)
-func damage(source)->void:
+# Score the enemy, with points going to the given Player source
+func score(source)->void:
 	var points = 100
 	source.score += points
 	
@@ -50,10 +50,11 @@ func damage(source)->void:
 	get_tree().get_root().add_child(points_popup)
 	points_popup.set_as_toplevel(true)
 	points_popup.position = global_position
-	
+
+
+# Call this when this enemy is really destroyed, so the level knows what's up.
+func destroy()->void:
 	emit_signal("destroyed")
-	
-	queue_free()
 
 
 func _set_captured(value:bool)->void:

@@ -13,7 +13,6 @@ var players := []
 
 var _enemies := 0
 var _active_spawners := 0
-var _runover_sound : AudioStreamPlayer = AudioStreamPlayer.new()
 
 onready var _spawners = $Spawners.get_children()
 
@@ -36,10 +35,6 @@ func _ready():
 			# warning-ignore:return_value_discarded	
 			player.connect("lives_changed", self, "_on_Player_lives_changed", [player])
 	
-	# Make the runover sfx player
-	add_child(_runover_sound)
-	_runover_sound.stream = preload("res://Enemies/2_runover.wav")
-	
 	_run()
 
 
@@ -53,7 +48,7 @@ func _on_Spawner_enemy_spawned(enemy:Node2D)->void:
 	
 	# Watch for when the enemy is destroyed
 	# warning-ignore:return_value_discarded
-	enemy.connect("destroyed", self, "_on_Enemy_destroyed", [], CONNECT_ONESHOT)
+	enemy.connect("destroyed", self, "_on_Enemy_destroyed")
 	
 
 func _on_Spawner_tree_exited()->void:
@@ -61,12 +56,6 @@ func _on_Spawner_tree_exited()->void:
 
 
 func _on_Enemy_destroyed()->void:
-	# We play the sound here because if we played it in the enemy,
-	# there would be a conflict between freeing the enemy and finishing
-	# the sound effect playback.
-	_runover_sound.play()
-	
-	# Now, handle the logic of enemy destruction
 	_enemies -= 1
 	_check_end_of_level()
 	

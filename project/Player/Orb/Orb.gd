@@ -27,15 +27,18 @@ var _bounces := 0
 
 var _direction = Direction.NONE
 
-var _captured_enemy : KinematicBody2D = null
+var _captured_enemies := []
 
 # These allow us to store values that can be restored if the enemy is released
 var _enemy_parent : Node2D = null
+
+var _marked_for_destruction := false
 
 onready var _enemy_overlap_area := $EnemyOverlapArea
 onready var _anim_player := $AnimationPlayer
 onready var _appear_sound := $AppearSound
 onready var _kick_sound := $KickSound
+onready var _runover_sound := $RunoverSound
 
 
 func _ready():
@@ -57,7 +60,8 @@ func _physics_process(delta):
 	# Handle having been kicked already
 	else:
 		_velocity.y += _gravity
-		_captured_enemy.rotation_degrees += _ROTATION_SPEED * delta \
+		for enemy in _captured_enemies:
+			enemy.rotation_degrees += _ROTATION_SPEED * delta \
 											* (-1 if _velocity.x < 0 else 1)
 		_velocity = move_and_slide(_velocity, Vector2.UP)
 
@@ -89,18 +93,27 @@ func _physics_process(delta):
 
 
 func _destroy():
+	# When two orbs hit each other, they can mutually call destroy,
+	# so we have to check if this is marked for destruction or not.
+	if _marked_for_destruction:
+		return
+	
+	_marked_for_destruction = true
 	var explosion : CPUParticles2D = _ORBSPLOSION.instance()
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position
 	explosion.emitting = true
 	explosion.color = player.color
 	
-	# Damaging the captured enemy should create an increase in player score.
-	_captured_enemy.damage(player)
+	for enemy in _captured_enemies:
+		enemy.destroy()
+	
 	queue_free()
 
 
 func kick(direction:Vector2)->void:
+	_captured_enemies[0].score(player)
+	
 	_kick_sound.play()
 	
 	_kicked = true
@@ -120,7 +133,13 @@ func kick(direction:Vector2)->void:
 
 func capture(enemy:KinematicBody2D)->void:
 	assert(not enemy.captured, "Enemy already captured!")
-	_captured_enemy = enemy
+	
+	# If there is already one in the captured array, then score any
+	# new ones that get run over
+	if _captured_enemies.size()>0:
+		enemy.score(player)
+	
+	_captured_enemies.append(enemy)
 	
 	# Store values that can be used if this enemy is dropped (uncaptured)
 	_enemy_parent = enemy.get_parent()
@@ -129,7 +148,8 @@ func capture(enemy:KinematicBody2D)->void:
 	# Reparent the enemy to the orb
 	var enemy_position := enemy.global_position
 	_enemy_parent.remove_child(enemy)
-	add_child(enemy)
+	#add_child(enemy)
+	call_deferred("add_child", enemy)
 	enemy.global_position = enemy_position
 
 	# Tween the captured enemy's position to the center of the orb
@@ -137,10 +157,12 @@ func capture(enemy:KinematicBody2D)->void:
 	add_child(tween)
 	# warning-ignore:return_value_discarded
 	tween.interpolate_property(enemy, "position", \
-		enemy.position, Vector2.ZERO, _TWEEN_TIME, \
+		enemy.position - position, Vector2.ZERO, _TWEEN_TIME, \
 		Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	# warning-ignore:return_value_discarded
 	tween.start()
+	
+	_runover_sound.play()
 
 
 func toggle_color():
@@ -152,21 +174,34 @@ func toggle_color():
 # that means the orb was kicked, and we should damage
 # the enemy we hit
 func _on_EnemyOverlapArea_body_entered(body:Node2D):
-	if body.has_method("damage"):
-		body.damage(player)
+	# When the enemy is reparented, even though the collision layer and mask
+	# have been turned off, it triggers an overlap with the area, presumably
+	# because we're still in the same physics frame.
+	# Hence, here, we skip over those overlaps for things we've already captured.
+	if _captured_enemies.has(body):
+		return
+	
+	if body.is_in_group("enemies"):
+		#body.damage(player)
+		capture(body)
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
+	# This one was never kicked, so it should have only one enemy
+	assert(_captured_enemies.size()==1)
+	
+	var enemy : KinematicBody2D = _captured_enemies[0]
+	
 	# Restore parent while keeping position
-	var pos = _captured_enemy.global_position
-	remove_child(_captured_enemy)
-	_enemy_parent.add_child(_captured_enemy)
-	_captured_enemy.global_position = pos
-	_captured_enemy.captured = false
+	var pos = enemy.global_position
+	remove_child(enemy)
+	_enemy_parent.add_child(enemy)
+	enemy.global_position = pos
+	enemy.captured = false
 
 	# Clear instance variables. Maybe not necessary, but it
 	# seems like it should help the garbage collector.
-	_captured_enemy = null
+	_captured_enemies = []
 	_enemy_parent = null
 	
 	queue_free()
