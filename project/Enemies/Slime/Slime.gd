@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+const BASE_POINTS := 100
+const CHAIN_BONUS := 50
+
 signal destroyed
 
 export var speed := 100
@@ -39,8 +42,8 @@ func _physics_process(_delta):
 
 
 # Score the enemy, with points going to the given Player source
-func score(source)->void:
-	var points = 100
+func score(source, chain:int = 0)->void:
+	var points = BASE_POINTS + chain * CHAIN_BONUS
 	source.score += points
 	
 	# Make and show the popup

@@ -36,6 +36,10 @@ func _physics_process(_delta):
 			# to accidentally create more than one orb. This break ensures
 			# that cannot happen.
 			break
+		
+		elif collision.collider.is_in_group("orbs"):
+			collision.collider.destroy()
+			queue_free()
 	
 	if is_on_wall():
 		queue_free()

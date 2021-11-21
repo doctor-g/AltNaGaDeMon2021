@@ -69,7 +69,7 @@ func _physics_process(delta):
 			_kick_sound.play()
 			_bounces += 1
 			if _bounces >= max_bounces:
-				_destroy()
+				destroy()
 			else:
 				_direction = Direction.DOWN_THEN_LEFT \
 					if _direction == Direction.RIGHT else Direction.DOWN_THEN_RIGHT
@@ -88,11 +88,11 @@ func _physics_process(delta):
 		var collision := get_slide_collision(i)
 		var collider : Node2D = collision.collider
 		if collider.is_in_group("orbs"):
-			_destroy()
-			collider._destroy()
+			destroy()
+			collider.destroy()
 
 
-func _destroy():
+func destroy():
 	# When two orbs hit each other, they can mutually call destroy,
 	# so we have to check if this is marked for destruction or not.
 	if _marked_for_destruction:
@@ -137,7 +137,7 @@ func capture(enemy:KinematicBody2D)->void:
 	# If there is already one in the captured array, then score any
 	# new ones that get run over
 	if _captured_enemies.size()>0:
-		enemy.score(player)
+		enemy.score(player, _captured_enemies.size())
 	
 	_captured_enemies.append(enemy)
 	

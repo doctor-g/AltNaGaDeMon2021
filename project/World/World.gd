@@ -71,7 +71,7 @@ func _on_Level_complete():
 	
 	# Remove the player pawns
 	for player in _players:
-		if player.pawn:
+		if player.pawn!=null and is_instance_valid(player.pawn):
 			player.pawn.queue_free()
 	
 	_level_index += 1
