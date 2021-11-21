@@ -14,25 +14,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 custom_constants/separation = 12
-alignment = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScoreLabel" type="Label" parent="."]
-margin_top = 331.0
 margin_right = 1120.0
-margin_bottom = 357.0
+margin_bottom = 26.0
 custom_colors/font_color = Color( 0.898039, 0.898039, 0.898039, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "X"
 align = 1
 
 [node name="LivesBox" type="HBoxContainer" parent="."]
-margin_top = 369.0
+margin_top = 38.0
 margin_right = 1120.0
-margin_bottom = 369.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
 alignment = 1
 
