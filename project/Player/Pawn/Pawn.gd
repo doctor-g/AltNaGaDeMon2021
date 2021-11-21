@@ -21,6 +21,7 @@ var _action_prefix : String
 
 onready var _sprite : AnimatedSprite = $SpriteContainer/PawnSprite
 onready var _anim_player := $AnimationPlayer
+onready var _projectile_spawn_point := $ProjectileLaunchPoint
 onready var _damageable_area := $DamageableArea
 onready var _invincibility_timer := $InvincibilityTimer
 onready var _sprite_container := $SpriteContainer
@@ -86,6 +87,8 @@ func _process_movement_input()->void:
 	_velocity.x = speed * direction
 	if _velocity.x != 0:
 		_sprite.flip_h = _velocity.x < 0
+		if sign(_projectile_spawn_point.position.x) != sign(_velocity.x):
+			_projectile_spawn_point.position.x *= -1
 		
 	if is_on_floor() and Input.is_action_just_pressed(_action("jump")):
 		_velocity.y -= jump_strength
@@ -101,7 +104,7 @@ func _process_movement_input()->void:
 		var projectile := _PROJECTILE.instance()
 		projectile.player = player
 		projectile.direction = Vector2.LEFT if _sprite.flip_h else Vector2.RIGHT
-		projectile.position = $ProjectileLaunchPoint.global_position
+		projectile.position = _projectile_spawn_point.global_position
 		get_parent().add_child(projectile)
 
 
