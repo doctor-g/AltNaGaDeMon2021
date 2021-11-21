@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://Common/ConcertOne-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://World/bg_grasslands.png" type="Texture" id=3]
 [ext_resource path="res://World/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World/theme.ogg" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 72
@@ -191,6 +192,11 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+bus = "Music"
 
 [connection signal="pressed" from="ButtonBox/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
 [connection signal="pressed" from="ButtonBox/MenuButton" to="." method="_on_MenuButton_pressed"]
