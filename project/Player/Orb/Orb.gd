@@ -4,6 +4,7 @@ const _NUMBER_OF_POINTS := 30
 const _TWEEN_TIME := 0.2
 const _PLAYER_LAYER := 1
 const _ROTATION_SPEED := 600 # degrees per second
+const _ORBSPLOSION := preload("res://Player/Orb/Orbsplosion.tscn")
 
 const _WARNING_COLOR := Color.yellow
 
@@ -88,6 +89,12 @@ func _physics_process(delta):
 
 
 func _destroy():
+	var explosion : CPUParticles2D = _ORBSPLOSION.instance()
+	get_parent().add_child(explosion)
+	explosion.global_position = global_position
+	explosion.emitting = true
+	explosion.color = player.color
+	
 	# Damaging the captured enemy should create an increase in player score.
 	_captured_enemy.damage(player)
 	queue_free()
