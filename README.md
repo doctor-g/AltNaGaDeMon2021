@@ -21,3 +21,6 @@ inclusion in the game.
 
 - [bubble sound](https://freesound.org/people/Ranner/sounds/487532/) by Ranner,
   licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+
+- [Simple pop sound effect](https://freesound.org/people/SplendidJams/sounds/570459/)
+  by SplendidJams, licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
