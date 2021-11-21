@@ -71,9 +71,7 @@ func _physics_process(_delta):
 	_velocity = move_and_slide(_velocity, Vector2.UP)
 	for i in range(0, get_slide_count()):
 		var collision := get_slide_collision(i)
-		if collision.collider.is_in_group("enemies"):
-			queue_free()
-		elif collision.collider.is_in_group("orbs"):
+		if collision.collider.is_in_group("orbs"):
 			collision.collider.kick(Vector2.RIGHT if direction_x>0 else Vector2.LEFT)
 
 
