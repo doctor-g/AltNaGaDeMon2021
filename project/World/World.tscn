@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://Common/ConcertOne-Regular.ttf" type="DynamicFontData" id=2]
@@ -80,6 +80,39 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 333, -80 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("LevelLabelHolder:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 538, 721 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "advance-level"
+tracks/0/type = "value"
+tracks/0/path = NodePath("LevelLabelHolder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 0.378929, 2.54912, 2.54912 ),
+"update": 0,
+"values": [ Vector2( 538, 721 ), Vector2( 538, 442 ), Vector2( 538, -52 ) ]
+}
+
+[sub_resource type="DynamicFont" id=5]
+size = 64
+outline_size = 2
+outline_color = Color( 0.2, 0.2, 0.2, 1 )
+font_data = ExtResource( 2 )
 
 [node name="World" type="Control"]
 script = ExtResource( 1 )
@@ -119,6 +152,7 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/GameOver = SubResource( 2 )
 anims/RESET = SubResource( 3 )
+anims/advance-level = SubResource( 4 )
 
 [node name="ButtonBox" type="VBoxContainer" parent="."]
 visible = false
@@ -143,6 +177,20 @@ margin_bottom = 52.0
 text = "Main Menu"
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="LevelLabelHolder" type="Node2D" parent="."]
+position = Vector2( 538, 721 )
+
+[node name="LevelLabel" type="Label" parent="LevelLabelHolder"]
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 5 )
+text = "Level N"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="ButtonBox/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
 [connection signal="pressed" from="ButtonBox/MenuButton" to="." method="_on_MenuButton_pressed"]

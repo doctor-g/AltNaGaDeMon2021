@@ -16,6 +16,7 @@ var _level_index := 0
 var _old_level : Node2D
 
 onready var _anim_player := $AnimationPlayer
+onready var _level_label := $LevelLabelHolder/LevelLabel
 
 func _ready():
 	assert(num_players > 0 and num_players <= _MAX_PLAYERS)
@@ -55,6 +56,9 @@ func _start_next_level():
 	new_level.connect("complete", self, "_on_Level_complete")
 	# warning-ignore:return_value_discarded	
 	new_level.connect("game_over", self, "_on_game_over")
+	
+	_level_label.text = "Level %d" % (_level_index+1)
+	_anim_player.play("advance-level")
 
 
 func _on_Level_complete():
