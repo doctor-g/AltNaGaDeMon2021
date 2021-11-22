@@ -85,13 +85,21 @@ func _on_game_over():
 func _on_PlayAgainButton_pressed():
 	var world = load("res://World/World.tscn").instance()
 	world.num_players = num_players
-	get_tree().get_root().add_child(world)
-	get_tree().get_root().remove_child(self)
+	var root := get_tree().get_root()
+	root.add_child(world)
+	root.remove_child(self)
 
 
 func _on_MenuButton_pressed():
-	# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://Screens/MainMenu.tscn")
+	# Note that we cannot simply use change_scene here. It doesn't
+	# jive with the add/remove child approach that has to be taken
+	# with the World above, which is required to set the number of
+	# players. Specifically, it works once, and then not again.
+	# The best I can figure is that this is due to get_tree().get_root()
+	# manipulation.
+	var root := get_tree().get_root()
+	root.remove_child(self)
+	root.add_child(load("res://Screens/MainMenu.tscn").instance())
 
 
 # This should be called when the level transition is complete, so then
