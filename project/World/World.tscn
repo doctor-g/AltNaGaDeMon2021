@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://Common/ConcertOne-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://World/bg_grasslands.png" type="Texture" id=3]
 [ext_resource path="res://World/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/theme.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Common/ui_theme.tres" type="Theme" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 72
@@ -29,7 +30,7 @@ tracks/0/keys = {
 "values": [ Vector2( 333, -80 ), Vector2( 333, 297.5 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("ButtonBox:visible")
+tracks/1/path = NodePath("HUD/ButtonBox:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -41,7 +42,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("ButtonBox:modulate")
+tracks/2/path = NodePath("HUD/ButtonBox:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -53,7 +54,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "method"
-tracks/3/path = NodePath("ButtonBox/PlayAgainButton")
+tracks/3/path = NodePath("HUD/ButtonBox/PlayAgainButton")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -116,6 +117,7 @@ outline_color = Color( 0.2, 0.2, 0.2, 1 )
 font_data = ExtResource( 2 )
 
 [node name="World" type="Control"]
+theme = ExtResource( 6 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -132,6 +134,32 @@ __meta__ = {
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 margin_right = 1120.0
 margin_bottom = 700.0
+
+[node name="ButtonBox" type="VBoxContainer" parent="HUD"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -83.5
+margin_top = 64.0
+margin_right = 83.5
+margin_bottom = 164.0
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayAgainButton" type="Button" parent="HUD/ButtonBox"]
+margin_right = 167.0
+margin_bottom = 44.0
+text = "Play Again"
+
+[node name="MenuButton" type="Button" parent="HUD/ButtonBox"]
+margin_top = 56.0
+margin_right = 167.0
+margin_bottom = 100.0
+text = "Main Menu"
 
 [node name="GameOverLabel" type="Label" parent="."]
 anchor_left = 0.5
@@ -155,28 +183,6 @@ anims/GameOver = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 anims/advance-level = SubResource( 4 )
 
-[node name="ButtonBox" type="VBoxContainer" parent="."]
-visible = false
-margin_left = 512.0
-margin_top = 397.0
-margin_right = 595.0
-margin_bottom = 441.0
-custom_constants/separation = 12
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PlayAgainButton" type="Button" parent="ButtonBox"]
-margin_right = 83.0
-margin_bottom = 20.0
-text = "Play Again"
-
-[node name="MenuButton" type="Button" parent="ButtonBox"]
-margin_top = 32.0
-margin_right = 83.0
-margin_bottom = 52.0
-text = "Main Menu"
-
 [node name="Tween" type="Tween" parent="."]
 
 [node name="LevelLabelHolder" type="Node2D" parent="."]
@@ -198,6 +204,6 @@ stream = ExtResource( 5 )
 autoplay = true
 bus = "Music"
 
-[connection signal="pressed" from="ButtonBox/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
-[connection signal="pressed" from="ButtonBox/MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="HUD/ButtonBox/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
+[connection signal="pressed" from="HUD/ButtonBox/MenuButton" to="." method="_on_MenuButton_pressed"]
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
