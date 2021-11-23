@@ -63,6 +63,11 @@ func _on_Enemy_destroyed()->void:
 func _check_end_of_level()->void:
 	assert(_enemies >= 0, "Counted negative enemies.")
 	if _enemies==0 and _active_spawners==0:
+		# If any pawn is playing a death animation, wait until it is done
+		for player in players:
+			var pawn = player.pawn
+			if pawn!=null and is_instance_valid(pawn) and pawn.is_playing_death_animation():
+				yield(pawn, "dead")
 		emit_signal("complete")
 
 

@@ -119,6 +119,11 @@ func dance():
 	_sprite.play("dance")
 	yield(get_tree().create_timer(0.5), "timeout")
 	_anim_player.play("teleport-out")
+	
+
+# Check if this pawn is in the state of playing its dying animation
+func is_playing_death_animation()->bool:
+	return _dead
 
 
 # This is called when an enemy crosses into the damageable area of the player.
