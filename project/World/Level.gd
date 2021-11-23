@@ -63,6 +63,10 @@ func _on_Enemy_destroyed()->void:
 func _check_end_of_level()->void:
 	assert(_enemies >= 0, "Counted negative enemies.")
 	if _enemies==0 and _active_spawners==0:
+		# Yes, the level is done, so remove all fireballs to ensure no
+		# one is killed post-victory.
+		get_tree().call_group("fireball", "queue_free")
+		
 		# If any pawn is playing a death animation, wait until it is done
 		for player in players:
 			var pawn = player.pawn
