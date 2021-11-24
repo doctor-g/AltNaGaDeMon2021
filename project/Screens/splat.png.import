@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/green-splat-vector-clipart_800.png-08a6f58c2ca2a91ba0c6f5ef19714f49.stex"
+path="res://.import/splat.png-a90723f12a1781c792b9aebc6bf5ef66.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/green-splat-vector-clipart_800.png"
-dest_files=[ "res://.import/green-splat-vector-clipart_800.png-08a6f58c2ca2a91ba0c6f5ef19714f49.stex" ]
+source_file="res://Screens/splat.png"
+dest_files=[ "res://.import/splat.png-a90723f12a1781c792b9aebc6bf5ef66.stex" ]
 
 [params]
 
