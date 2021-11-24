@@ -2,6 +2,8 @@ extends Control
 
 const _WORLD := preload("res://World/World.tscn")
 
+onready var _options_menu := $OptionsMenu
+
 
 func _ready():
 	$ButtonBox/Start1PButton.grab_focus()
@@ -23,3 +25,5 @@ func _start_game(num_players:int)->void:
 	get_tree().get_root().remove_child(self)
 
 
+func _on_OptionsButton_pressed():
+	_options_menu.show_modal(true)
