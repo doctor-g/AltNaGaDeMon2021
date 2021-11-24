@@ -3,13 +3,11 @@
 [ext_resource path="res://Common/ui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Screens/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://Screens/menu.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Screens/title_font.tres" type="DynamicFontData" id=4]
 
-[sub_resource type="DynamicFontData" id=1]
-font_path = "res://Common/ConcertOne-Regular.ttf"
-
-[sub_resource type="DynamicFont" id=2]
-size = 72
-font_data = SubResource( 1 )
+[sub_resource type="DynamicFont" id=1]
+size = 84
+font_data = ExtResource( 4 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -17,22 +15,8 @@ anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TitleLabel" type="Label" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -185.0
-margin_top = -28.5
-margin_right = 185.0
-margin_bottom = 28.5
-custom_fonts/font = SubResource( 2 )
-text = "A Cool Title"
-__meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [  ]
 }
 
 [node name="ButtonBox" type="VBoxContainer" parent="."]
@@ -65,6 +49,25 @@ text = "Two Players"
 stream = ExtResource( 3 )
 autoplay = true
 bus = "Music"
+
+[node name="Blobbo" type="Label" parent="."]
+margin_left = 333.0
+margin_top = 112.0
+margin_right = 727.0
+margin_bottom = 268.0
+custom_fonts/font = SubResource( 1 )
+text = "Blobbo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Globbo" type="Label" parent="."]
+margin_left = 420.0
+margin_top = 197.0
+margin_right = 806.0
+margin_bottom = 353.0
+custom_fonts/font = SubResource( 1 )
+text = "Globbo"
 
 [connection signal="pressed" from="ButtonBox/Start1PButton" to="." method="_on_Start1PButton_pressed"]
 [connection signal="pressed" from="ButtonBox/Start2PButton" to="." method="_on_Start2PButton_pressed"]

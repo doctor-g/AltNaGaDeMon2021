@@ -1,4 +1,6 @@
-# NaGaDeMon 2021 Project
+# Blobbo Globbo
+
+A game project for [National Game Design Month 2021](https://nagademon.org/)
 
 ## Build notes
 
@@ -15,6 +17,9 @@ inclusion in the game.
 
 - [Mochiy Pop P One](https://fonts.google.com/specimen/Mochiy+Pop+P+One) by FONTDASU,
    licensed under [OFL](docs/fonts/MochiyPopPOne/OFL.txt)
+
+- [Corben](https://fonts.google.com/specimen/Corben) by Vernon Adams, licensed under
+  [OFL](docs/fonts/Corben/OFL.txt)  
 
 - Sound effects from [Sci-Fi Sounds](https://www.kenney.nl/assets/sci-fi-sounds)
   by Kenney, licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
