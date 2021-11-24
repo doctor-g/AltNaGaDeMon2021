@@ -27,3 +27,7 @@ func _start_game(num_players:int)->void:
 
 func _on_OptionsButton_pressed():
 	_options_menu.show_modal(true)
+
+
+func _on_QuitButton_pressed():
+	get_tree().quit(0)

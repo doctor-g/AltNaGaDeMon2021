@@ -1,14 +1,26 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Common/ui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Screens/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://Screens/menu.ogg" type="AudioStream" id=3]
 [ext_resource path="res://Screens/title_font.tres" type="DynamicFontData" id=4]
 [ext_resource path="res://UI/OptionsMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/green-splat-vector-clipart_800.png" type="Texture" id=6]
+[ext_resource path="res://Common/ConcertOne-Regular.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0, 0.421875, 0.362549, 1, 0.653809, 0, 0.8125, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 84
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 7 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -20,18 +32,34 @@ __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
 
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundSplat" type="Sprite" parent="."]
+position = Vector2( 540, 334 )
+rotation = 0.16057
+scale = Vector2( 1.2, 0.9 )
+texture = ExtResource( 6 )
+
 [node name="ButtonBox" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -102.0
-margin_top = -264.0
+margin_top = -308.0
 margin_right = 102.0
-margin_bottom = -108.0
+margin_bottom = -96.0
 custom_constants/separation = 12
 alignment = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -52,6 +80,12 @@ margin_right = 204.0
 margin_bottom = 156.0
 text = "Audio Options"
 
+[node name="QuitButton" type="Button" parent="ButtonBox"]
+margin_top = 168.0
+margin_right = 204.0
+margin_bottom = 212.0
+text = "Quit"
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 autoplay = true
@@ -59,9 +93,9 @@ bus = "Music"
 
 [node name="Blobbo" type="Label" parent="."]
 margin_left = 333.0
-margin_top = 112.0
+margin_top = 155.0
 margin_right = 727.0
-margin_bottom = 268.0
+margin_bottom = 311.0
 custom_fonts/font = SubResource( 1 )
 text = "Blobbo"
 __meta__ = {
@@ -70,9 +104,9 @@ __meta__ = {
 
 [node name="Globbo" type="Label" parent="."]
 margin_left = 420.0
-margin_top = 197.0
+margin_top = 240.0
 margin_right = 806.0
-margin_bottom = 353.0
+margin_bottom = 396.0
 custom_fonts/font = SubResource( 1 )
 text = "Globbo"
 
@@ -82,6 +116,22 @@ anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="AboutLabel" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -69.0
+margin_bottom = -14.0
+custom_colors/font_color = Color( 0.776471, 0.827451, 0.772549, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "A Silly Game for National Game Design Month 2021
+©2021 Paul Gestwicki · https://github.com/doctor-g/NaGaDeMon2021"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="ButtonBox/Start1PButton" to="." method="_on_Start1PButton_pressed"]
 [connection signal="pressed" from="ButtonBox/Start2PButton" to="." method="_on_Start2PButton_pressed"]
 [connection signal="pressed" from="ButtonBox/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="ButtonBox/QuitButton" to="." method="_on_QuitButton_pressed"]
