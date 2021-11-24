@@ -64,12 +64,15 @@ anims/captured-and-releasing = SubResource( 1 )
 
 [node name="AppearSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "SFX"
 
 [node name="KickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "SFX"
 
 [node name="RunoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+bus = "SFX"
 
 [connection signal="body_entered" from="EnemyOverlapArea" to="." method="_on_EnemyOverlapArea_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

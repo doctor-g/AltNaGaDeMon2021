@@ -24,3 +24,4 @@ scale_amount_curve = SubResource( 1 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 autoplay = true
+bus = "SFX"

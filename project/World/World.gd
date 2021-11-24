@@ -17,6 +17,8 @@ var _old_level : Node2D
 
 onready var _anim_player := $AnimationPlayer
 onready var _level_label := $LevelLabelHolder/LevelLabel
+onready var _pause_menu := $PauseMenu
+
 
 func _ready():
 	assert(num_players > 0 and num_players <= _MAX_PLAYERS)
@@ -79,6 +81,7 @@ func _on_Level_complete():
 
 
 func _on_game_over():
+	_pause_menu.enabled = false
 	_anim_player.play("GameOver")
 
 

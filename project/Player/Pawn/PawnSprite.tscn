@@ -35,11 +35,6 @@ animations = [ {
 "name": "dance",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "duck",
@@ -49,6 +44,11 @@ animations = [ {
 "loop": true,
 "name": "hurt",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
 } ]
 
 [node name="PawnSprite" type="AnimatedSprite"]
@@ -57,6 +57,5 @@ material = ExtResource( 16 )
 position = Vector2( 0, -46 )
 frames = SubResource( 1 )
 animation = "dance"
-frame = 1
 playing = true
 script = ExtResource( 17 )

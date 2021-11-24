@@ -118,3 +118,4 @@ anims/disappear = SubResource( 3 )
 anims/spawn = SubResource( 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+bus = "SFX"
