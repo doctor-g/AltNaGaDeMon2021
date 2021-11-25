@@ -44,6 +44,10 @@ func _ready():
 	_run()
 
 
+# Run the level.
+# This is a separate method so that special levels might override it.
+# If not, then it runs whatever it gets by calling _get_spawner_data(),
+# which subclasses need to override.
 func _run():
 	var data = _get_spawner_data()
 	var number_of_entries = data.size()
