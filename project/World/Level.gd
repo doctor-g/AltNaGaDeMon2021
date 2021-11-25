@@ -1,5 +1,6 @@
 extends Node2D
 
+const _BLUE_SLIME := preload("res://Enemies/Slime/BlueSlime.tscn")
 const _GREEN_SLIME := preload("res://Enemies/Slime/GreenSlime.tscn")
 const _PINK_SLIME := preload("res://Enemies/Slime/PinkSlime.tscn")
 
