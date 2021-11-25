@@ -34,7 +34,10 @@ func _ready():
 	for i in range(0,players.size()):
 		var player = players[i]
 		if player.lives > 0:
-			player.pawn = _spawn_pawn(i, false)
+			var pawn = _spawn_pawn(i, false)
+			player.pawn = pawn
+			if i==1:
+				pawn.start_facing_right = false
 			# warning-ignore:return_value_discarded	
 			player.connect("lives_changed", self, "_on_Player_lives_changed", [player])
 	

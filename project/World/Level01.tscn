@@ -70,10 +70,10 @@ __meta__ = {
 [node name="SpawnPoints" type="Node" parent="."]
 
 [node name="P1SpawnPoint" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 310, 620 )
+position = Vector2( 317, 633 )
 
 [node name="P2SpawnPoint" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 834, 619 )
+position = Vector2( 805, 633 )
 
 [node name="Spawners" type="Node2D" parent="."]
 __meta__ = {

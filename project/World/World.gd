@@ -3,6 +3,8 @@ extends Control
 const _MAX_PLAYERS := 2
 
 export var dance_duration := 2.0
+export var level_index := 0
+
 
 var num_players := 2
 
@@ -12,7 +14,6 @@ var _levels := [
 	load("res://World/Level00.tscn"),
 	load("res://World/Level01.tscn")
 ]
-var _level_index := 0
 var _old_level : Node2D
 
 onready var _anim_player := $AnimationPlayer
@@ -34,7 +35,7 @@ func _ready():
 
 
 func _start_next_level():
-	var new_level : Node2D = _levels[_level_index % _levels.size()].instance()
+	var new_level : Node2D = _levels[level_index % _levels.size()].instance()
 	new_level.players = _players
 	
 	# If there is an old level, fly in the new level, then remove the old level.
@@ -59,7 +60,7 @@ func _start_next_level():
 	# warning-ignore:return_value_discarded	
 	new_level.connect("game_over", self, "_on_game_over")
 	
-	_level_label.text = "Level %d" % (_level_index+1)
+	_level_label.text = "Level %d" % (level_index+1)
 	_anim_player.play("advance-level")
 
 
@@ -76,7 +77,7 @@ func _on_Level_complete():
 		if player.pawn!=null and is_instance_valid(player.pawn):
 			player.pawn.queue_free()
 	
-	_level_index += 1
+	level_index += 1
 	_start_next_level()
 
 

@@ -8,6 +8,7 @@ const _PROJECTILE := preload("res://Player/Projectile/Projectile.tscn")
 
 export var speed := 250
 export var jump_strength := 780
+export var start_facing_right := true setget _set_start_facing_right
 
 var player
 var start_invincible := false
@@ -150,3 +151,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func _on_InvincibilityTimer_timeout():
 	_sprite.modulate = Color.white
 	_damageable_area.monitoring = true
+	
+
+func _set_start_facing_right(value:bool)->void:
+	start_facing_right = value
+	_sprite.flip_h = not value
