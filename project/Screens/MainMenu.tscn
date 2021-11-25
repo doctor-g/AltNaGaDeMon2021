@@ -123,10 +123,11 @@ margin_top = -69.0
 margin_bottom = -14.0
 custom_colors/font_color = Color( 0.815686, 0.956863, 0.968627, 1 )
 custom_fonts/font = SubResource( 4 )
-text = "A Silly Game for National Game Design Month 2021
+text = "A Silly Game for National Game Design Month
 ©2021 Paul Gestwicki · https://github.com/doctor-g/NaGaDeMon2021"
 align = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
