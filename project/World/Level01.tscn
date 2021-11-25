@@ -80,8 +80,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Spawner" parent="Spawners" instance=ExtResource( 5 )]
-position = Vector2( 840, 120 )
-
-[node name="Spawner2" parent="Spawners" instance=ExtResource( 5 )]
+[node name="Spawner0" parent="Spawners" instance=ExtResource( 5 )]
 position = Vector2( 277, 120 )
+
+[node name="Spawner1" parent="Spawners" instance=ExtResource( 5 )]
+position = Vector2( 840, 120 )

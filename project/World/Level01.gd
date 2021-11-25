@@ -1,11 +1,15 @@
 extends "Level.gd"
 
-func _run():
-	yield(get_tree().create_timer(1.0, false), "timeout")
-	
-	_spawners[0].spawn(_GREEN_SLIME, true)
-	_spawners[1].spawn(_GREEN_SLIME, false)
-	yield(get_tree().create_timer(3.0, false), "timeout")
-	
-	_spawners[0].spawn(_GREEN_SLIME, true, true)
-	_spawners[1].spawn(_GREEN_SLIME, false, true)
+func _get_spawner_data():
+	return [
+		1.0,
+		{
+			0: [_GREEN_SLIME, _RIGHT],
+			1: [_GREEN_SLIME, _LEFT],
+		},
+		3.0,
+		{
+			0: [_BLUE_SLIME, _RIGHT],
+			1: [_BLUE_SLIME, _LEFT]
+		}
+	]

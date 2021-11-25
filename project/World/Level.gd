@@ -3,6 +3,8 @@ extends Node2D
 const _BLUE_SLIME := preload("res://Enemies/Slime/BlueSlime.tscn")
 const _GREEN_SLIME := preload("res://Enemies/Slime/GreenSlime.tscn")
 const _PINK_SLIME := preload("res://Enemies/Slime/PinkSlime.tscn")
+const _LEFT := 0
+const _RIGHT := 1
 
 # Sent when the level is complete
 signal complete
@@ -39,9 +41,27 @@ func _ready():
 	_run()
 
 
-# Run this level
 func _run():
-	assert(false, "Subclasses must override this function.")
+	var data = _get_spawner_data()
+	var number_of_entries = data.size()
+	for i in number_of_entries:
+		var entry = data[i]
+		if typeof(entry) == TYPE_INT or typeof(entry)==TYPE_REAL:
+			var duration := entry as float
+			yield(get_tree().create_timer(duration, false), "timeout")
+		else:
+			var map := entry as Dictionary
+			for key in map:
+				var spawner_index := key as int
+				var description := map[key] as Array
+				var direction : bool = (description[1] == _LEFT)
+				var is_last : bool = (i == number_of_entries-1)
+				_spawners[spawner_index].spawn(description[0], direction, is_last)
+
+
+func _get_spawner_data()->Array:
+	assert(false, "Specific level subclasses must override this function.")
+	return [] # Never executed but must be present to compile
 
 
 func _on_Spawner_enemy_spawned(enemy:Node2D)->void:
