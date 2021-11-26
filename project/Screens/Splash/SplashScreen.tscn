@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Common/ui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Screens/Splash/controller.png" type="Texture" id=2]
@@ -27,34 +27,6 @@ shader_param/reveal_slider = 0.0
 shader_param/hide_slider = 0.0
 shader_param/smoothing = 0.1
 
-[sub_resource type="Animation" id=3]
-resource_name = "OverlayAnimation"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Overlay:material:shader_param/reveal_slider")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 2.21914, 2.21914 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Overlay:material:shader_param/hide_slider")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1.6, 2 ),
-"transitions": PoolRealArray( 1, 0.34151, 0.34151 ),
-"update": 0,
-"values": [ 0.0, 0.0, 1.0 ]
-}
-
 [sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
@@ -80,6 +52,66 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "wipe-in"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Overlay:material:shader_param/reveal_slider")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2.21914, 2.21914 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_wipe_out_if_not_html5"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "wipe-out"
+length = 0.4
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_go_to_main_menu"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Overlay:material:shader_param/hide_slider")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1.93187, 1.93187 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
 }
 
 [node name="SplashScreen" type="Control"]
@@ -113,18 +145,34 @@ __meta__ = {
 position = Vector2( 555, 385 )
 texture = ExtResource( 2 )
 
+[node name="ReadyButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -59.0
+margin_right = 57.0
+margin_bottom = -21.0
+text = "Ready"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Overlay" type="ColorRect" parent="."]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "OverlayAnimation"
-anims/OverlayAnimation = SubResource( 3 )
+autoplay = "wipe-in"
 anims/RESET = SubResource( 4 )
+anims/wipe-in = SubResource( 3 )
+anims/wipe-out = SubResource( 5 )
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="pressed" from="ReadyButton" to="." method="_on_ReadyButton_pressed"]

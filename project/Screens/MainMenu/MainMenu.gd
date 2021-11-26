@@ -3,10 +3,13 @@ extends Control
 const _WORLD := preload("res://World/World.tscn")
 
 onready var _options_menu := $OptionsMenu
+onready var _quit_button := $ButtonBox/QuitButton
 
 
 func _ready():
 	$ButtonBox/Start1PButton.grab_focus()
+	if OS.get_name()=="HTML5":
+		_quit_button.visible = false
 
 
 func _on_Start1PButton_pressed():
