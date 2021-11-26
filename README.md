@@ -12,17 +12,13 @@ inclusion in the game.
 
 ## Third-Party Assets
 
-- [Platformer Art Deluxe](https://www.kenney.nl/assets/platformer-art-deluxe) by
-   Kenney, licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+- [Platformer Art Deluxe](https://www.kenney.nl/assets/platformer-art-deluxe), [Input Prompts Pixel 16x](https://www.kenney.nl/assets/input-prompts-pixel-16), and [Sci-Fi Sounds](https://www.kenney.nl/assets/sci-fi-sounds) by [Kenney](https://www.kenney.nl), licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
 - [Mochiy Pop P One](https://fonts.google.com/specimen/Mochiy+Pop+P+One) by FONTDASU,
    licensed under [OFL](docs/fonts/MochiyPopPOne/OFL.txt)
 
 - [Corben](https://fonts.google.com/specimen/Corben) by Vernon Adams, licensed under
   [OFL](docs/fonts/Corben/OFL.txt)  
-
-- Sound effects from [Sci-Fi Sounds](https://www.kenney.nl/assets/sci-fi-sounds)
-  by Kenney, licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
 - [bubble sound](https://freesound.org/people/Ranner/sounds/487532/) by Ranner,
   licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
