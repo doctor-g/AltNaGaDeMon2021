@@ -115,7 +115,7 @@ func _on_MenuButton_pressed():
 	# manipulation.
 	var root := get_tree().get_root()
 	root.remove_child(self)
-	root.add_child(load("res://Screens/MainMenu.tscn").instance())
+	root.add_child(load("res://Screens/MainMenu/MainMenu.tscn").instance())
 
 
 # This should be called when the level transition is complete, so then
