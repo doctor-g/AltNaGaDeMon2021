@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Common/ui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Screens/MainMenu.gd" type="Script" id=2]
@@ -17,6 +17,57 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 7 )
+
+[sub_resource type="Shader" id=5]
+code = "// See https://godotshaders.com/shader/simple-circle-transition-2/
+shader_type canvas_item;
+
+uniform float circle_size : hint_range(0,1) = 0.5;
+uniform float width = 1120;
+uniform float height = 700;
+
+void fragment() {
+	float ratio = width / height;
+	float dist = distance(vec2(0.5,0.5), vec2(mix(0.5, UV.x, ratio), UV.y));
+	COLOR.a = step(circle_size, dist);
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/circle_size = 1.0
+shader_param/width = 1120.0
+shader_param/height = 700.0
+
+[sub_resource type="Animation" id=7]
+resource_name = "Appear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Overlay:material:shader_param/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2.54912, 2.54912 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Overlay:material:shader_param/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -130,6 +181,21 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="Overlay" type="ColorRect" parent="."]
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Appear"
+anims/Appear = SubResource( 7 )
+anims/RESET = SubResource( 8 )
 
 [connection signal="pressed" from="ButtonBox/Start1PButton" to="." method="_on_Start1PButton_pressed"]
 [connection signal="pressed" from="ButtonBox/Start2PButton" to="." method="_on_Start2PButton_pressed"]
