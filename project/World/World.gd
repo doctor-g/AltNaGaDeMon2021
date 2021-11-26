@@ -6,6 +6,8 @@ export var dance_duration := 2.0
 export var level_index := 0
 export var use_difficulty_override := false
 export var difficulty_override := 0
+export var use_test_level := false
+export(PackedScene) var TestLevel : PackedScene
 
 var num_players := 2
 
@@ -14,7 +16,6 @@ var _difficulty := 0
 var _level_node : Node2D
 var _levels := [
 	load("res://World/Levels/Level00.tscn"),
-	load("res://World/Levels/Level01.tscn")
 ]
 var _old_level : Node2D
 
@@ -37,7 +38,11 @@ func _ready():
 
 
 func _start_next_level():
-	var new_level : Node2D = _levels[level_index % _levels.size()].instance()
+	var new_level : Node2D
+	if use_test_level:
+		new_level = TestLevel.instance()
+	else:
+		new_level = _levels[level_index % _levels.size()].instance()
 	new_level.players = _players
 	
 	# Either use the overridden difficulty (for testing levels) or compute 

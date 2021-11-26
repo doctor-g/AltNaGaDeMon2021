@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://Common/ConcertOne-Regular.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://World/theme.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Common/ui_theme.tres" type="Theme" id=6]
 [ext_resource path="res://UI/PauseMenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/Levels/TestLevel.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 72
@@ -126,6 +127,7 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+TestLevel = ExtResource( 8 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 520, 377 )

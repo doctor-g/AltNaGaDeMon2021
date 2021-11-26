@@ -1,5 +1,6 @@
 extends Level
 
+
 func _get_spawner_data()->Array:
 	return [
 		1.0,
