@@ -5,11 +5,42 @@ func _get_spawner_data()->Array:
 		1.0,
 		{
 			0: [ _GREEN_SLIME, _RIGHT],
-			1: [ _PINK_SLIME, _LEFT],
-		},
-		3.0,
-			{
-			0: [ _PINK_SLIME, _RIGHT],
 			1: [ _GREEN_SLIME, _LEFT],
 		},
+		1.0,
+		{
+			0: [ _GREEN_SLIME, _LEFT],
+			1: [ _GREEN_SLIME, _RIGHT],
+		},
+		1.0,
+		{
+			0: [ _GREEN_SLIME, _RIGHT],
+			1: [ _GREEN_SLIME, _LEFT],
+		},
+		1.0,
+		{
+			0: [ _GREEN_SLIME, _LEFT],
+			1: [ _GREEN_SLIME, _RIGHT],
+		},
+		3.0,
+		1.0,
+		{
+			0: [ _GREEN_SLIME, _RIGHT],
+			1: [ _GREEN_SLIME, _RIGHT],
+		},
+		1.0,
+		{
+			0: [ _GREEN_SLIME, _LEFT],
+			1: [ _GREEN_SLIME, _LEFT],
+		},
+		1.0,
+		{
+			0: [ _GREEN_SLIME, _RIGHT],
+			1: [ _GREEN_SLIME, _RIGHT],
+		},
+		1.0,
+		{
+			0: [ _GREEN_SLIME, _LEFT],
+			1: [ _GREEN_SLIME, _LEFT],
+		}
 	]
