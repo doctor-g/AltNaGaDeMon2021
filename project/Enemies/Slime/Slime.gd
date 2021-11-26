@@ -43,7 +43,14 @@ func _physics_process(_delta):
 	if not captured:
 		_velocity.y += _gravity
 		_velocity = move_and_slide(_velocity, Vector2.UP)
-		if is_on_wall():
+		
+		# I _think_ what can happen here is that moving can trigger overlaps,
+		# which alters captured state, at which point a slime could keep
+		# moving horizontally (velocity.x != 0, see below) unless we check
+		# here if we just got captured.
+		if captured:
+			return
+		elif is_on_wall():
 			direction.x *= -1
 			_velocity.x = direction.x * speed
 		_sprite.flip_h = direction.x > 0
