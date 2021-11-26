@@ -69,7 +69,6 @@ anims/RESET = SubResource( 3 )
 anims/captured = SubResource( 4 )
 
 [node name="FireballTimer" type="Timer" parent="."]
-wait_time = 2.0
 autostart = true
 
 [node name="FireballSound" type="AudioStreamPlayer" parent="."]

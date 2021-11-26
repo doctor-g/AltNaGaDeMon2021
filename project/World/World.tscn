@@ -126,7 +126,6 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-level_index = 1
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 520, 377 )

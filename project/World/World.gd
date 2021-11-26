@@ -4,11 +4,13 @@ const _MAX_PLAYERS := 2
 
 export var dance_duration := 2.0
 export var level_index := 0
-
+export var use_difficulty_override := false
+export var difficulty_override := 0
 
 var num_players := 2
 
 var _players := []
+var _difficulty := 0
 var _level_node : Node2D
 var _levels := [
 	load("res://World/Level00.tscn"),
@@ -37,6 +39,16 @@ func _ready():
 func _start_next_level():
 	var new_level : Node2D = _levels[level_index % _levels.size()].instance()
 	new_level.players = _players
+	
+	# Either use the overridden difficulty (for testing levels) or compute 
+	# the difficulty based on how many times we've gone through all the
+	# levels
+	if use_difficulty_override:
+		_difficulty = difficulty_override
+	else:
+		# warning-ignore:integer_division
+		_difficulty = level_index / _levels.size()
+	new_level.difficulty = _difficulty
 	
 	# If there is an old level, fly in the new level, then remove the old level.
 	if _level_node:

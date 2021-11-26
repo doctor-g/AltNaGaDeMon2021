@@ -10,8 +10,9 @@ var _enemy:Node2D
 
 onready var _anim_player := $AnimationPlayer
 
-func spawn(scene:PackedScene, facing_left:=true, last_enemy:=false):
+func spawn(scene:PackedScene, difficulty:int=0, facing_left:=true, last_enemy:=false):
 	_enemy = scene.instance()
+	_enemy.difficulty = difficulty
 	_enemy.global_position = global_position
 	_enemy.direction = Vector2.LEFT if facing_left else Vector2.RIGHT
 	# This will start the spawn anim, which at the right point,

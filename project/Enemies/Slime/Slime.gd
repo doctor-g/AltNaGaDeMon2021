@@ -5,7 +5,12 @@ const CHAIN_BONUS := 50
 
 signal destroyed
 
-export var speed := 100
+export var speed := 100.0
+# Difficulty level. Starts at zero.
+export var difficulty := 0
+
+# Percent increase per difficulty level
+export var speed_increase := 0.25
 
 # Which direction is this thing moving
 export var direction := Vector2.LEFT
@@ -24,6 +29,9 @@ onready var _sprite := $AnimatedSprite
 onready var _anim_player := $AnimationPlayer
 
 func _ready():
+	# Increase the base speed based on difficulty
+	speed += speed * difficulty * speed_increase
+	
 	# The slime defaults to facing left
 	_velocity.x = speed * direction.x
 	

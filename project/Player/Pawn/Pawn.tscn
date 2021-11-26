@@ -221,6 +221,7 @@ shape = ExtResource( 14 )
 [node name="SpriteContainer" type="Node2D" parent="."]
 
 [node name="PawnSprite" parent="SpriteContainer" instance=ExtResource( 2 )]
+frame = 1
 
 [node name="ProjectileLaunchPoint" type="Node2D" parent="."]
 position = Vector2( 23, -31 )

@@ -14,6 +14,9 @@ signal game_over
 
 var players := []
 
+# A modifier to add to all the enemies.
+var difficulty := 0
+
 var _enemies := 0
 var _active_spawners := 0
 
@@ -63,7 +66,7 @@ func _run():
 				var description := map[key] as Array
 				var direction : bool = (description[1] == _LEFT)
 				var is_last : bool = (i == number_of_entries-1)
-				_spawners[spawner_index].spawn(description[0], direction, is_last)
+				_spawners[spawner_index].spawn(description[0], difficulty, direction, is_last)
 
 
 func _get_spawner_data()->Array:
