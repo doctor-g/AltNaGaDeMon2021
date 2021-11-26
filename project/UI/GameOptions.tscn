@@ -45,5 +45,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FullscreenCheckbox" type="CheckButton" parent="."]
+margin_left = 483.0
+margin_top = 76.0
+margin_right = 637.0
+margin_bottom = 116.0
+size_flags_horizontal = 4
+text = "  Fullscreen"
+
 [connection signal="value_changed" from="MusicVolume" to="." method="_on_MusicVolume_value_changed"]
 [connection signal="value_changed" from="SFXVolume" to="." method="_on_SFXVolume_value_changed"]
+[connection signal="toggled" from="FullscreenCheckbox" to="." method="_on_FullscreenCheckbox_toggled"]
