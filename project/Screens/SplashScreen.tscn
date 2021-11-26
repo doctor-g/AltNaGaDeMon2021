@@ -1,0 +1,129 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Common/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Screens/controller.png" type="Texture" id=2]
+[ext_resource path="res://Screens/SplashScreen.gd" type="Script" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float reveal_slider : hint_range(0,1);
+uniform float hide_slider : hint_range(0,1);
+
+void fragment() 
+{
+	if (UV.x > reveal_slider || UV.x < hide_slider) 
+	{
+		COLOR = vec4(0,0,0,1);
+	}
+	else {
+		COLOR = vec4(0,0,0,0);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/reveal_slider = 0.0
+shader_param/hide_slider = 0.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "OverlayAnimation"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Overlay:material:shader_param/reveal_slider")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2.21914, 2.21914 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Overlay:material:shader_param/hide_slider")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.6, 2 ),
+"transitions": PoolRealArray( 1, 0.34151, 0.34151 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Overlay:material:shader_param/reveal_slider")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Overlay:material:shader_param/hide_slider")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[node name="SplashScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.541176, 0.541176, 0.541176, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Background"]
+margin_left = 333.0
+margin_top = 545.0
+margin_right = 778.0
+margin_bottom = 583.0
+text = "Game Controllers Recommended"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controller" type="Sprite" parent="."]
+position = Vector2( 555, 385 )
+texture = ExtResource( 2 )
+
+[node name="Overlay" type="ColorRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "OverlayAnimation"
+anims/OverlayAnimation = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
