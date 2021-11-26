@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Common/ui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Screens/MainMenu/MainMenu.gd" type="Script" id=2]
@@ -50,6 +50,16 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0.0, 1.0 ]
 }
+tracks/1/type = "animation"
+tracks/1/path = NodePath("AnimationPlayer/TitleAnimator")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": PoolStringArray( "TitleDropIn" ),
+"times": PoolRealArray( 0.3 )
+}
 
 [sub_resource type="Animation" id=8]
 length = 0.001
@@ -64,6 +74,112 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Title:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 568, -109 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Title/Blobbo:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Title/Globbo:rect_rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "TitleDropIn"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 0.366021, 0.366021 ),
+"update": 0,
+"values": [ Vector2( 568, -101 ), Vector2( 568, 286 ) ]
+}
+tracks/1/type = "animation"
+tracks/1/path = NodePath("AnimationPlayer/BlobboAnimator")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": PoolStringArray( "BlobboTwist" ),
+"times": PoolRealArray( 0.8 )
+}
+tracks/2/type = "animation"
+tracks/2/path = NodePath("AnimationPlayer/GlobboAnimator")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": PoolStringArray( "GlobboTwist" ),
+"times": PoolRealArray( 0.8 )
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "BlobboTwist"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title/Blobbo:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4 ),
+"transitions": PoolRealArray( 0.63728, 1.41421, 0.574349, 1.27456, 1.27456 ),
+"update": 0,
+"values": [ 0.0, -1.5, 0.0, 2.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "GlobboTwist"
+length = 3.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title/Globbo:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 2.4 ),
+"transitions": PoolRealArray( 0.535887, 1.8025, 1.8025 ),
+"update": 0,
+"values": [ 0.0, 1.5, -1.5 ]
 }
 
 [node name="MainMenu" type="Control"]
@@ -136,11 +252,15 @@ stream = ExtResource( 3 )
 autoplay = true
 bus = "Music"
 
-[node name="Blobbo" type="Label" parent="."]
-margin_left = 333.0
-margin_top = 155.0
-margin_right = 727.0
-margin_bottom = 311.0
+[node name="Title" type="Node2D" parent="."]
+position = Vector2( 568, -109 )
+
+[node name="Blobbo" type="Label" parent="Title"]
+margin_left = -251.0
+margin_top = -121.0
+margin_right = 154.0
+margin_bottom = 39.0
+rect_pivot_offset = Vector2( 193, 86 )
 custom_colors/font_color = Color( 0.545098, 0.811765, 0.729412, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "Blobbo"
@@ -148,14 +268,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Globbo" type="Label" parent="."]
-margin_left = 420.0
-margin_top = 240.0
-margin_right = 806.0
-margin_bottom = 396.0
+[node name="Globbo" type="Label" parent="Title"]
+margin_left = -152.0
+margin_top = -26.0
+margin_right = 245.0
+margin_bottom = 134.0
+rect_pivot_offset = Vector2( 218, 87 )
 custom_colors/font_color = Color( 0.952941, 0.686275, 0.772549, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "Globbo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 5 )]
 anchor_left = 0.0
@@ -193,6 +317,18 @@ __meta__ = {
 autoplay = "Appear"
 anims/Appear = SubResource( 7 )
 anims/RESET = SubResource( 8 )
+
+[node name="TitleAnimator" type="AnimationPlayer" parent="AnimationPlayer"]
+root_node = NodePath("../..")
+anims/TitleDropIn = SubResource( 11 )
+
+[node name="BlobboAnimator" type="AnimationPlayer" parent="AnimationPlayer"]
+root_node = NodePath("../..")
+anims/BlobboTwist = SubResource( 9 )
+
+[node name="GlobboAnimator" type="AnimationPlayer" parent="AnimationPlayer"]
+root_node = NodePath("../..")
+anims/GlobboTwist = SubResource( 14 )
 
 [connection signal="pressed" from="ButtonBox/Start1PButton" to="." method="_on_Start1PButton_pressed"]
 [connection signal="pressed" from="ButtonBox/Start2PButton" to="." method="_on_Start2PButton_pressed"]
