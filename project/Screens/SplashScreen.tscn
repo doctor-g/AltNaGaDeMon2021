@@ -9,22 +9,23 @@ code = "shader_type canvas_item;
 
 uniform float reveal_slider : hint_range(0,1);
 uniform float hide_slider : hint_range(0,1);
+uniform float smoothing = 0.1;
 
 void fragment() 
 {
-	if (UV.x > reveal_slider || UV.x < hide_slider) 
-	{
-		COLOR = vec4(0,0,0,1);
-	}
-	else {
-		COLOR = vec4(0,0,0,0);
-	}
+	if (UV.x >= reveal_slider)
+		COLOR.a = smoothstep(reveal_slider, reveal_slider+smoothing, UV.x);
+	else if (UV.x <= hide_slider)
+		COLOR.a = 1.0-smoothstep(hide_slider-smoothing, hide_slider, UV.x);
+	else
+		COLOR.a = 0.0;
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 shader_param/reveal_slider = 0.0
 shader_param/hide_slider = 0.0
+shader_param/smoothing = 0.1
 
 [sub_resource type="Animation" id=3]
 resource_name = "OverlayAnimation"
