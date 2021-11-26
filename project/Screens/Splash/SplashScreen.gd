@@ -7,6 +7,11 @@ func _ready():
 	_ready_button.visible = OS.get_name()=="HTML5"
 
 
+func _unhandled_key_input(event):
+	if event.is_action("ui_accept"):
+		_go_to_main_menu()
+
+
 func _wipe_out_if_not_html5()->void:
 	if not OS.get_name()=="HTML5":
 		_anim_player.play("wipe-out")
