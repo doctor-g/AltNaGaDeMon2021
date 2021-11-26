@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="AltNaGaDeMon2021"
-run/main_scene="res://World/World.tscn"
+run/main_scene="res://Screens/Splash/SplashScreen.tscn"
 config/icon="res://icon.png"
 
 [display]
