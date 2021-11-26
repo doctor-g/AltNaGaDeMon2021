@@ -1,4 +1,4 @@
-extends "../Level.gd"
+extends Level
 
 
 func _get_spawner_data()->Array:

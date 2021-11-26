@@ -1,3 +1,4 @@
+class_name Level
 extends Node2D
 
 const _BLUE_SLIME := preload("res://Enemies/Slime/BlueSlime.tscn")
