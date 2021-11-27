@@ -3,3 +3,6 @@ build
 
 # Ignore LMMS backup files
 raw_assets/*bak
+
+# Ignore emacs backup files
+*~
