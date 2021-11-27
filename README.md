@@ -26,6 +26,7 @@ inclusion in the game.
 - [Simple pop sound effect](https://freesound.org/people/SplendidJams/sounds/570459/)
   by SplendidJams, licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
-- [Green splat vector clipart](https://www.goodfreephotos.com/vector-images/green-splat-vector-clipart.png.php) by [Arvin61R58](http://arvin61r58.deviantart.com/) used under public domain.
+- Splat based on the public domain
+  image [grey-splat](https://freesvg.org/grey-splat)
 
 - [Gamepad](https://openclipart.org/detail/191485/gaming-icon) by [cinemacookie](https://openclipart.org/artist/cinemacookie), licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) as explained [here](https://openclipart.org/share).

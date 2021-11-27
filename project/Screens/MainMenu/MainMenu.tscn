@@ -5,7 +5,7 @@
 [ext_resource path="res://Screens/MainMenu/menu.ogg" type="AudioStream" id=3]
 [ext_resource path="res://Screens/MainMenu/title_dynamic_font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://UI/OptionsMenu.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Screens/MainMenu/splat.png" type="Texture" id=6]
+[ext_resource path="res://Screens/BackgroundSplat.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Common/ConcertOne-Regular.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Screens/CircleWipeOverlay.tscn" type="PackedScene" id=8]
 
@@ -175,15 +175,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.541176, 0.541176, 0.541176, 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="BackgroundSplat" type="Sprite" parent="."]
-modulate = Color( 0.501961, 0.745098, 0.121569, 1 )
-position = Vector2( 540, 334 )
-rotation = 0.16057
-scale = Vector2( 1.2, 0.9 )
-texture = ExtResource( 6 )
+[node name="BackgroundSplat" parent="." instance=ExtResource( 6 )]
 
 [node name="ButtonBox" type="VBoxContainer" parent="."]
 anchor_left = 0.5
