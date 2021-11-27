@@ -29,7 +29,7 @@ func _ready():
 
 
 func _process(_delta):
-	_score_label.text = str(_displayed_score)
+	_score_label.text = "%d" % _displayed_score
 	
 
 func _on_Player_lives_changed(_new_lives:int)->void:
