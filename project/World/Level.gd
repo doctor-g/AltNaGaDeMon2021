@@ -57,7 +57,7 @@ func _run():
 	var number_of_entries = data.size()
 	for i in number_of_entries:
 		var entry = data[i]
-		if typeof(entry) == TYPE_INT or typeof(entry)==TYPE_REAL:
+		if _is_number(entry):
 			var duration := entry as float
 			yield(get_tree().create_timer(duration, false), "timeout")
 		else:
@@ -66,8 +66,25 @@ func _run():
 				var spawner_index := key as int
 				var description := map[key] as Array
 				var direction : bool = (description[1] == _LEFT)
-				var is_last : bool = (i == number_of_entries-1)
+				var is_last : bool = not _has_more_spawns(spawner_index, i+1, data)
 				_spawners[spawner_index].spawn(description[0], difficulty, direction, is_last)
+
+
+func _is_number(value)->bool:
+	return typeof(value)==TYPE_INT or typeof(value)==TYPE_REAL
+	
+
+# Check if the given spawner index ever spawns again, starting the
+# search from from_index.
+func _has_more_spawns(spawner_number:int, from_index:int, data:Array)->bool:
+	for i in range(from_index, data.size()):
+		var entry = data[i]
+		# Ignore numeric entries, which are wait times
+		if not _is_number(entry):
+			var map := entry as Dictionary
+			if map.has(spawner_number):
+				return true
+	return false
 
 
 func _get_spawner_data()->Array:
