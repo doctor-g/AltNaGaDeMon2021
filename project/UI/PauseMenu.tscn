@@ -6,7 +6,6 @@
 
 [node name="PauseMenu" type="PopupDialog"]
 pause_mode = 2
-visible = true
 anchor_left = 0.214286
 anchor_top = 0.227143
 anchor_right = 0.764286
@@ -69,5 +68,6 @@ margin_right = 300.0
 margin_bottom = 372.0
 text = "Continue"
 
+[connection signal="popup_hide" from="." to="." method="_on_PauseMenu_popup_hide"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
