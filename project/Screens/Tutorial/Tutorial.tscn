@@ -121,6 +121,7 @@ position = Vector2( 836, 360 )
 texture = ExtResource( 2 )
 
 [node name="Orb" type="Sprite" parent="."]
+modulate = Color( 0.545098, 0.811765, 0.729412, 1 )
 position = Vector2( 709, 480.5 )
 scale = Vector2( 1.4, 1.4 )
 texture = ExtResource( 3 )
@@ -129,6 +130,17 @@ texture = ExtResource( 3 )
 position = Vector2( 0.714294, -2.85715 )
 scale = Vector2( 0.714286, 0.714286 )
 texture = ExtResource( 1 )
+
+[node name="PointsPopup" type="Label" parent="Orb"]
+margin_left = -2.14285
+margin_top = -50.3571
+margin_right = 60.8571
+margin_bottom = -12.3571
+custom_colors/font_color = Color( 0.545098, 0.811765, 0.729412, 1 )
+text = "+100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="JumpButton" type="Sprite" parent="."]
 position = Vector2( 554, 200 )
