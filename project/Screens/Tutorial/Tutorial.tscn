@@ -86,19 +86,19 @@ __meta__ = {
 }
 
 [node name="P1Stand" type="Sprite" parent="."]
-position = Vector2( 654, 331 )
+position = Vector2( 651, 331 )
 texture = ExtResource( 4 )
 
-[node name="P1Walk03" type="Sprite" parent="P1Stand"]
-position = Vector2( -2, 129.5 )
-texture = ExtResource( 6 )
-
 [node name="P1Jump" type="Sprite" parent="."]
-position = Vector2( 657, 198 )
+position = Vector2( 651, 198 )
 texture = ExtResource( 5 )
 
+[node name="P1Walk03" type="Sprite" parent="."]
+position = Vector2( 651, 460.5 )
+texture = ExtResource( 6 )
+
 [node name="Projectile" type="Sprite" parent="."]
-position = Vector2( 757, 337 )
+position = Vector2( 748, 337 )
 texture = ExtResource( 3 )
 
 [node name="Projectile2" type="Sprite" parent="Projectile"]
@@ -153,24 +153,24 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 9 )
 
 [node name="MoveLR" type="Sprite" parent="."]
-position = Vector2( 549, 466 )
+position = Vector2( 554, 466 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 10 )
 
 [node name="JumpLabel" type="Label" parent="."]
 margin_left = 410.0
-margin_top = 180.0
+margin_top = 179.0
 margin_right = 500.0
-margin_bottom = 218.0
+margin_bottom = 217.0
 text = "Jump!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ShootLabel" type="Label" parent="."]
-margin_left = 405.0
+margin_left = 410.0
 margin_top = 311.0
-margin_right = 495.0
+margin_right = 500.0
 margin_bottom = 349.0
 text = "Shoot!"
 __meta__ = {
@@ -178,9 +178,9 @@ __meta__ = {
 }
 
 [node name="KickLabel" type="Label" parent="."]
-margin_left = 411.0
+margin_left = 410.0
 margin_top = 446.5
-margin_right = 501.0
+margin_right = 500.0
 margin_bottom = 484.5
 text = "Kick!"
 __meta__ = {
