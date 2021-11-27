@@ -33,7 +33,7 @@ func _on_QuitButton_pressed():
 	_unpause()
 	get_tree().call_group("world", "queue_free")
 	# warning-ignore:return_value_discarded
-	get_tree().change_scene_to(load("res://Screens/MainMenu.tscn"))
+	get_tree().change_scene_to(load("res://Screens/MainMenu/MainMenu.tscn"))
 
 
 # The esc key will hide a popup, which is deep in the Godot API.
