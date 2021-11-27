@@ -206,7 +206,6 @@ autoplay = true
 bus = "Music"
 
 [node name="PauseMenu" parent="." instance=ExtResource( 7 )]
-visible = false
 
 [connection signal="pressed" from="HUD/ButtonBox/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
 [connection signal="pressed" from="HUD/ButtonBox/MenuButton" to="." method="_on_MenuButton_pressed"]

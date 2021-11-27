@@ -16,6 +16,11 @@ var _difficulty := 0
 var _level_node : Node2D
 var _levels := [
 	load("res://World/Levels/Level00.tscn"),
+	load("res://World/Levels/Level01.tscn"),
+	load("res://World/Levels/Level02.tscn"),
+	load("res://World/Levels/Level03.tscn"),
+	load("res://World/Levels/Level04.tscn"),
+	load("res://World/Levels/Level05.tscn"),
 ]
 var _old_level : Node2D
 
