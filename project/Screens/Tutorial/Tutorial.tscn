@@ -35,7 +35,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "wipe-in-and-out"
-length = 3.5
+length = 7.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Overlay:material:shader_param/circle_size")
 tracks/0/interp = 1
@@ -43,7 +43,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 3.3, 3.5 ),
+"times": PoolRealArray( 0, 0.3, 7.3, 7.5 ),
 "transitions": PoolRealArray( 0.450625, 0.450625, 2.07053, 2.07053 ),
 "update": 0,
 "values": [ 0.0, 1.0, 1.0, 0.0 ]
