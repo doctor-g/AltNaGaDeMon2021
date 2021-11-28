@@ -143,7 +143,7 @@ func capture(enemy:KinematicBody2D)->void:
 	
 	# If there is already one in the captured array, then score any
 	# new ones that get run over
-	if _captured_enemies.size()>0:
+	if _captured_enemies.size()>0 and player.can_earn_points:
 		enemy.score(player, _captured_enemies.size())
 	
 	_captured_enemies.append(enemy)

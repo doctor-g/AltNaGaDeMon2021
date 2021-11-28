@@ -140,6 +140,11 @@ func _on_DamageableArea_body_entered(body:Node2D):
 		$StandingCollision.set_deferred("disabled", true)
 		$DamageableArea/CollisionShape2D.set_deferred("disabled", true)
 		_anim_player.play("dead")
+		
+		# If this is the last life lost by a player, they cannot earn any more
+		# points
+		if player.lives == 1:
+			player.can_earn_points = false
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

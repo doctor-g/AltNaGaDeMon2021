@@ -12,6 +12,12 @@ var score := 0 setget _set_score
 var pawn setget _set_pawn
 var color 
 
+# This is separated from lives above because the actual loss of a life happens
+# at the end of the death animation. However, we want to stop getting points
+# when the last life is the process of being lost. Hence, we have this
+# variable to track that.
+var can_earn_points := true
+
 func _init(_index:int):
 	index = _index
 	color = _COLORS[index]
@@ -24,8 +30,9 @@ func make_hud()->Control:
 
 
 func _set_score(value:int)->void:
-	score = value
-	emit_signal("score_changed", score)
+	if can_earn_points:
+		score = value
+		emit_signal("score_changed", score)
 
 
 func _set_lives(value:int)->void:
