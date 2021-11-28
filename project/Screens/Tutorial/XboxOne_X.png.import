@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MoveLR.png-986f8c9eaa8b96cf01b3aa23418634a6.stex"
+path="res://.import/XboxOne_X.png-234b4e0d94b06189da2c588fedb64b91.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Screens/Tutorial/MoveLR.png"
-dest_files=[ "res://.import/MoveLR.png-986f8c9eaa8b96cf01b3aa23418634a6.stex" ]
+source_file="res://Screens/Tutorial/XboxOne_X.png"
+dest_files=[ "res://.import/XboxOne_X.png-234b4e0d94b06189da2c588fedb64b91.stex" ]
 
 [params]
 

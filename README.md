@@ -12,7 +12,9 @@ inclusion in the game.
 
 ## Third-Party Assets
 
-- [Platformer Art Deluxe](https://www.kenney.nl/assets/platformer-art-deluxe), [Input Prompts Pixel 16x](https://www.kenney.nl/assets/input-prompts-pixel-16), and [Sci-Fi Sounds](https://www.kenney.nl/assets/sci-fi-sounds) by [Kenney](https://www.kenney.nl), licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+- [Platformer Art Deluxe](https://www.kenney.nl/assets/platformer-art-deluxe) and [Sci-Fi Sounds](https://www.kenney.nl/assets/sci-fi-sounds) by [Kenney](https://www.kenney.nl), licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+
+- [Free Prompts Pack](https://opengameart.org/content/free-keyboard-and-controllers-prompts-pack) by [Xelu](https://opengameart.org/users/xelu), licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
 - [Mochiy Pop P One](https://fonts.google.com/specimen/Mochiy+Pop+P+One) by FONTDASU,
    licensed under [OFL](docs/fonts/MochiyPopPOne/OFL.txt)

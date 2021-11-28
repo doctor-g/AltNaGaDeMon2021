@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ShootButton.png-9c4b468d4fd5320cd001fae64ecf60f9.stex"
+path="res://.import/XboxOne_A.png-7231fd65a9633dc7aa86bc223018bb55.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Screens/Tutorial/ShootButton.png"
-dest_files=[ "res://.import/ShootButton.png-9c4b468d4fd5320cd001fae64ecf60f9.stex" ]
+source_file="res://Screens/Tutorial/XboxOne_A.png"
+dest_files=[ "res://.import/XboxOne_A.png-7231fd65a9633dc7aa86bc223018bb55.stex" ]
 
 [params]
 
