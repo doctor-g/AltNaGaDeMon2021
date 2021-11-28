@@ -4,7 +4,7 @@
 [ext_resource path="res://Player/Projectile/Projectile.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 20.0
+radius = 25.0
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0.00346021, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.025 ), 0.0, 0.0, 0, 0 ]
