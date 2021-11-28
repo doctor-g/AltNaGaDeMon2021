@@ -40,6 +40,10 @@ func _physics_process(_delta):
 		elif collision.collider.is_in_group("orbs"):
 			collision.collider.destroy()
 			queue_free()
+			
+			# As above, if we don't break, we might multiply process items,
+			# but we can just stop here.
+			break
 	
 	if is_on_wall():
 		queue_free()

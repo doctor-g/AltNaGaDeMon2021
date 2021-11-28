@@ -97,16 +97,23 @@ func destroy():
 	# so we have to check if this is marked for destruction or not.
 	if _marked_for_destruction:
 		return
-	
-	_marked_for_destruction = true
+	else:
+		_marked_for_destruction = true
+		
+	# If this was never kicked, release its captive first.
+	# Otherwise, destroy its captured enemies.
+	if not _kicked:
+		_release_captured_enemy()
+	else:
+		for enemy in _captured_enemies:
+			enemy.destroy()
+		
+	# Play the explosion effect
 	var explosion : CPUParticles2D = _ORBSPLOSION.instance()
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position
 	explosion.emitting = true
 	explosion.color = player.color
-	
-	for enemy in _captured_enemies:
-		enemy.destroy()
 	
 	queue_free()
 
@@ -187,6 +194,11 @@ func _on_EnemyOverlapArea_body_entered(body:Node2D):
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
+	_release_captured_enemy()
+	queue_free()
+
+
+func _release_captured_enemy():
 	# This one was never kicked, so it should have only one enemy
 	assert(_captured_enemies.size()==1)
 	
@@ -203,5 +215,3 @@ func _on_AnimationPlayer_animation_finished(_anim_name):
 	# seems like it should help the garbage collector.
 	_captured_enemies = []
 	_enemy_parent = null
-	
-	queue_free()
